@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing Skills Quiz — Shah Abdul Latif Academy</title>
+  <link rel="stylesheet" href="english-style.css">
+</head>
+<body>
+<div class="topbar">✿ <span>Shah Abdul Latif Academy</span> — By Safdar Junejo ✿</div>
+<header>
+  <span class="header-ornament">✿ ❀ ✿</span>
+  <div class="academy-name">Shah Abdul Latif Academy</div>
+  <div class="academy-by">By Safdar Junejo</div>
+</header>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html">🏠 Home</a>
+    <a href="../math-quiz.html">➕ Math Quiz</a>
+    <a href="../english-quiz.html">📝 English Quiz</a>
+    <a href="../updates.html">📢 Updates</a>
+    <a href="../about.html">ℹ️ About Us</a>
+    <a href="../privacy.html">🔒 Privacy</a>
+    <a href="../contact.html">📩 Contact</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <!-- BANNER -->
+  <div class="quiz-banner">
+    <span class="big">✍️</span>
+    <div class="topic-num">Topic 13</div>
+    <h1>Writing Skills</h1>
+    <p>English Quiz · 20 Questions · 10 per page · Choose an answer then click Submit</p>
+  </div>
+
+  <!-- ALL TOPICS NAV -->
+  <div style="margin-bottom:28px;">
+    <p style="font-size:13px;color:var(--muted);font-weight:700;margin-bottom:12px;">📚 All English Topics:</p>
+    <div class="topic-nav-grid">
+    <div class="topic-nav-card" onclick="window.location.href='parts-of-speech.html'" style="cursor:pointer;"><span class="t-icon">🔤</span><div class="t-num">Topic 1</div><div class="t-name">Parts of Speech</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='tenses.html'" style="cursor:pointer;"><span class="t-icon">⏰</span><div class="t-num">Topic 2</div><div class="t-name">Tenses</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='subject-verb.html'" style="cursor:pointer;"><span class="t-icon">🔗</span><div class="t-num">Topic 3</div><div class="t-name">Subject Verb Agreement</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='articles.html'" style="cursor:pointer;"><span class="t-icon">📌</span><div class="t-num">Topic 4</div><div class="t-name">Articles</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='prepositions.html'" style="cursor:pointer;"><span class="t-icon">📍</span><div class="t-num">Topic 5</div><div class="t-name">Prepositions</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='modals.html'" style="cursor:pointer;"><span class="t-icon">💭</span><div class="t-num">Topic 6</div><div class="t-name">Modals</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='voice.html'" style="cursor:pointer;"><span class="t-icon">🔄</span><div class="t-num">Topic 7</div><div class="t-name">Voice</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='narration.html'" style="cursor:pointer;"><span class="t-icon">💬</span><div class="t-num">Topic 8</div><div class="t-name">Narration</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='error-detection.html'" style="cursor:pointer;"><span class="t-icon">🔍</span><div class="t-num">Topic 9</div><div class="t-name">Error Detection</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='synonyms.html'" style="cursor:pointer;"><span class="t-icon">🟰</span><div class="t-num">Topic 10</div><div class="t-name">Synonyms</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='antonyms.html'" style="cursor:pointer;"><span class="t-icon">↔️</span><div class="t-num">Topic 11</div><div class="t-name">Antonyms</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='comprehension.html'" style="cursor:pointer;"><span class="t-icon">📖</span><div class="t-num">Topic 12</div><div class="t-name">Reading Comprehension</div></div>
+    <div class="topic-nav-card current" onclick="window.location.href='writing-skills.html'" style="cursor:pointer;"><span class="t-icon">✍️</span><div class="t-num">Topic 13</div><div class="t-name">Writing Skills</div></div>
+  </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="page-progress"><div class="page-progress-fill" id="pageProgressFill" style="width:0%"></div></div>
+
+  <!-- META -->
+  <div class="page-meta">
+    <div class="page-info-badge" id="pageInfo">Page 1</div>
+    <div class="score-badge" id="scoreDisplay">Answer questions to see score</div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="questionsContainer"></div>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <button class="btn-page btn-prev" id="btnPrev" onclick="goPage(-1)" disabled>← Previous</button>
+    <button class="btn-page btn-submit btn-gold" id="btnSubmit" onclick="submitPage()" style="background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--ink);">✅ Submit Page</button>
+    <button class="btn-page btn-next" id="btnNext" onclick="goPage(1)">Next →</button>
+  </div>
+
+  <!-- COMMENT SECTION -->
+  <div class="comments-section">
+    <h3>💬 Discussion — Writing Skills</h3>
+    <div id="cmt-login-notice" style="display:none;" class="alert-info">
+      🔑 <a href="../login.html" style="color:var(--emerald);font-weight:700;">Sign in</a> to leave a comment.
+    </div>
+    <div id="cmt-form" style="margin-bottom:20px;">
+      <div class="form-group">
+        <label>Your Comment</label>
+        <textarea id="cmt-input" placeholder="Ask a question, share a tip, or help a classmate about Writing Skills…"></textarea>
+      </div>
+      <button class="btn-primary" onclick="postComment()">Post Comment</button>
+    </div>
+    <div id="cmt-list"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px;font-size:26px;letter-spacing:6px;">🌸 🌼 🌺 🌻 🌹 🌷</div>
+</div>
+
+<footer>
+  <div class="footer-logo">✿ Shah Abdul Latif Academy ✿</div>
+  <p>By <strong style="color:var(--gold-lt)">Safdar Junejo</strong></p>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="../math-quiz.html">Math Quiz</a>
+    <a href="../english-quiz.html">English Quiz</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div style="display:flex;gap:10px;justify-content:center;margin:12px 0;flex-wrap:wrap;">
+    <a href="https://chat.whatsapp.com/LPfuFLEUzOIHy6QER9WFd4?mode=gi_t" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none;">💬 WhatsApp Group</a>
+    <a href="https://whatsapp.com/channel/0029Vb5tZoH0lwgxaM1Jmr2h" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#128C7E;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none;">📢 WhatsApp Channel</a>
+  </div>
+  <p style="font-size:12px;">© 2026 Shah Abdul Latif Academy.</p>
+</footer>
+
+<script src="../app.js"></script>
+<script src="english-common.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"A simile uses which words to compare?", opts:["is/are", "like/as", "because/since", "and/or"], ans:1},
+  {q:"'The wind whispered.' is an example of:", opts:["Simile", "Metaphor", "Personification", "Alliteration"], ans:2},
+  {q:"In a formal essay, first-person pronouns should be:", opts:["Used freely", "Avoided", "Required", "Doubled"], ans:1},
+  {q:"A 'hook' in an introduction is meant to:", opts:["Summarise the essay", "State the thesis", "Grab the reader's attention", "List references"], ans:2},
+  {q:"Parallel structure means:", opts:["Using rhyming words", "Using the same grammatical form in a series", "Repeating the thesis", "Writing short sentences"], ans:1},
+  {q:"Which transition shows contrast?", opts:["Furthermore", "In addition", "However", "Similarly"], ans:2},
+  {q:"The most effective topic sentence:", opts:["Is vague", "Contains the main idea clearly", "Asks a question", "Starts with 'There is'"], ans:1},
+  {q:"'Peer review' means:", opts:["Writing a movie review", "Getting feedback from others", "Reviewing your own work", "Publishing online"], ans:1},
+  {q:"A metaphor:", opts:["Uses 'like' or 'as'", "Directly states one thing IS another", "Gives human qualities to objects", "Repeats consonant sounds"], ans:1},
+  {q:"Alliteration is:", opts:["Repetition of vowel sounds", "Repetition of initial consonant sounds", "A type of rhyme", "A figure of comparison"], ans:1},
+  {q:"The concluding paragraph should:", opts:["Introduce a new argument", "Summarise and close the essay", "Define terms", "List examples"], ans:1},
+  {q:"Active voice is preferred because it is:", opts:["More complex", "More formal", "Clearer and more direct", "Longer"], ans:2},
+  {q:"'Onomatopoeia' is a word that:", opts:["Means the opposite", "Imitates a sound", "Compares two things", "Repeats sounds"], ans:1},
+  {q:"A persuasive essay aims to:", opts:["Tell a story", "Describe a scene", "Convince the reader", "Explain a process"], ans:2},
+  {q:"Which is the best concluding sentence?", opts:["In conclusion, there are many reasons.", "To sum up, the evidence clearly shows that education is vital.", "Conclusion.", "That is all."], ans:1},
+  {q:"Coherence in writing means:", opts:["Using many words", "Ideas flow logically and clearly", "Using complex vocabulary", "Writing long sentences"], ans:1},
+  {q:"A narrative essay tells:", opts:["How to do something", "An argument", "A personal story or event", "Facts and statistics"], ans:2},
+  {q:"Transition words like 'firstly, secondly, finally' show:", opts:["Contrast", "Cause and effect", "Sequence/order", "Summary"], ans:2},
+  {q:"Which sentence is most concise?", opts:["Due to the fact that it was raining, she stayed inside.", "She stayed inside because it was raining.", "She stayed inside due to the reason that it was raining.", "On account of rain she stayed inside."], ans:1},
+  {q:"Proofreading means:", opts:["Writing the first draft", "Checking for errors after writing", "Getting ideas", "Making an outline"], ans:1},
+];
+
+window._topicKey = 'writing-skills';
+document.addEventListener('DOMContentLoaded', () => {
+  initQuiz(QUESTIONS, 'writing-skills');
+  // Comments
+  renderComments('writing-skills', 'cmt-list');
+  const u = typeof Auth !== 'undefined' ? Auth.currentUser() : null;
+  if (!u) {
+    document.getElementById('cmt-login-notice').style.display = 'block';
+    document.getElementById('cmt-form').style.display = 'none';
+  }
+});
+
+function postComment() {
+  submitComment('writing-skills', 'cmt-list');
+}
+</script>
+</body>
+</html>

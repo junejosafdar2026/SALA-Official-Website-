@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tenses Quiz — Shah Abdul Latif Academy</title>
+  <link rel="stylesheet" href="english-style.css">
+</head>
+<body>
+<div class="topbar">✿ <span>Shah Abdul Latif Academy</span> — By Safdar Junejo ✿</div>
+<header>
+  <span class="header-ornament">✿ ❀ ✿</span>
+  <div class="academy-name">Shah Abdul Latif Academy</div>
+  <div class="academy-by">By Safdar Junejo</div>
+</header>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html">🏠 Home</a>
+    <a href="../math-quiz.html">➕ Math Quiz</a>
+    <a href="../english-quiz.html">📝 English Quiz</a>
+    <a href="../updates.html">📢 Updates</a>
+    <a href="../about.html">ℹ️ About Us</a>
+    <a href="../privacy.html">🔒 Privacy</a>
+    <a href="../contact.html">📩 Contact</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <!-- BANNER -->
+  <div class="quiz-banner">
+    <span class="big">⏰</span>
+    <div class="topic-num">Topic 2</div>
+    <h1>Tenses</h1>
+    <p>English Quiz · 20 Questions · 10 per page · Choose an answer then click Submit</p>
+  </div>
+
+  <!-- ALL TOPICS NAV -->
+  <div style="margin-bottom:28px;">
+    <p style="font-size:13px;color:var(--muted);font-weight:700;margin-bottom:12px;">📚 All English Topics:</p>
+    <div class="topic-nav-grid">
+    <div class="topic-nav-card" onclick="window.location.href='parts-of-speech.html'" style="cursor:pointer;"><span class="t-icon">🔤</span><div class="t-num">Topic 1</div><div class="t-name">Parts of Speech</div></div>
+    <div class="topic-nav-card current" onclick="window.location.href='tenses.html'" style="cursor:pointer;"><span class="t-icon">⏰</span><div class="t-num">Topic 2</div><div class="t-name">Tenses</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='subject-verb.html'" style="cursor:pointer;"><span class="t-icon">🔗</span><div class="t-num">Topic 3</div><div class="t-name">Subject Verb Agreement</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='articles.html'" style="cursor:pointer;"><span class="t-icon">📌</span><div class="t-num">Topic 4</div><div class="t-name">Articles</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='prepositions.html'" style="cursor:pointer;"><span class="t-icon">📍</span><div class="t-num">Topic 5</div><div class="t-name">Prepositions</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='modals.html'" style="cursor:pointer;"><span class="t-icon">💭</span><div class="t-num">Topic 6</div><div class="t-name">Modals</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='voice.html'" style="cursor:pointer;"><span class="t-icon">🔄</span><div class="t-num">Topic 7</div><div class="t-name">Voice</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='narration.html'" style="cursor:pointer;"><span class="t-icon">💬</span><div class="t-num">Topic 8</div><div class="t-name">Narration</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='error-detection.html'" style="cursor:pointer;"><span class="t-icon">🔍</span><div class="t-num">Topic 9</div><div class="t-name">Error Detection</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='synonyms.html'" style="cursor:pointer;"><span class="t-icon">🟰</span><div class="t-num">Topic 10</div><div class="t-name">Synonyms</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='antonyms.html'" style="cursor:pointer;"><span class="t-icon">↔️</span><div class="t-num">Topic 11</div><div class="t-name">Antonyms</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='comprehension.html'" style="cursor:pointer;"><span class="t-icon">📖</span><div class="t-num">Topic 12</div><div class="t-name">Reading Comprehension</div></div>
+    <div class="topic-nav-card" onclick="window.location.href='writing-skills.html'" style="cursor:pointer;"><span class="t-icon">✍️</span><div class="t-num">Topic 13</div><div class="t-name">Writing Skills</div></div>
+  </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="page-progress"><div class="page-progress-fill" id="pageProgressFill" style="width:0%"></div></div>
+
+  <!-- META -->
+  <div class="page-meta">
+    <div class="page-info-badge" id="pageInfo">Page 1</div>
+    <div class="score-badge" id="scoreDisplay">Answer questions to see score</div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="questionsContainer"></div>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <button class="btn-page btn-prev" id="btnPrev" onclick="goPage(-1)" disabled>← Previous</button>
+    <button class="btn-page btn-submit btn-gold" id="btnSubmit" onclick="submitPage()" style="background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--ink);">✅ Submit Page</button>
+    <button class="btn-page btn-next" id="btnNext" onclick="goPage(1)">Next →</button>
+  </div>
+
+  <!-- COMMENT SECTION -->
+  <div class="comments-section">
+    <h3>💬 Discussion — Tenses</h3>
+    <div id="cmt-login-notice" style="display:none;" class="alert-info">
+      🔑 <a href="../login.html" style="color:var(--emerald);font-weight:700;">Sign in</a> to leave a comment.
+    </div>
+    <div id="cmt-form" style="margin-bottom:20px;">
+      <div class="form-group">
+        <label>Your Comment</label>
+        <textarea id="cmt-input" placeholder="Ask a question, share a tip, or help a classmate about Tenses…"></textarea>
+      </div>
+      <button class="btn-primary" onclick="postComment()">Post Comment</button>
+    </div>
+    <div id="cmt-list"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px;font-size:26px;letter-spacing:6px;">🌸 🌼 🌺 🌻 🌹 🌷</div>
+</div>
+
+<footer>
+  <div class="footer-logo">✿ Shah Abdul Latif Academy ✿</div>
+  <p>By <strong style="color:var(--gold-lt)">Safdar Junejo</strong></p>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="../math-quiz.html">Math Quiz</a>
+    <a href="../english-quiz.html">English Quiz</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div style="display:flex;gap:10px;justify-content:center;margin:12px 0;flex-wrap:wrap;">
+    <a href="https://chat.whatsapp.com/LPfuFLEUzOIHy6QER9WFd4?mode=gi_t" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none;">💬 WhatsApp Group</a>
+    <a href="https://whatsapp.com/channel/0029Vb5tZoH0lwgxaM1Jmr2h" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#128C7E;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none;">📢 WhatsApp Channel</a>
+  </div>
+  <p style="font-size:12px;">© 2026 Shah Abdul Latif Academy.</p>
+</footer>
+
+<script src="../app.js"></script>
+<script src="english-common.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"'She writes a letter.' is in:", opts:["Past Simple", "Present Simple", "Future Simple", "Present Continuous"], ans:1},
+  {q:"'They were playing cricket.' is:", opts:["Past Simple", "Past Continuous", "Present Perfect", "Past Perfect"], ans:1},
+  {q:"Choose the correct form: 'He ___ to school yesterday.'", opts:["go", "goes", "went", "has gone"], ans:2},
+  {q:"'I have lived here for five years.' is:", opts:["Simple Past", "Present Perfect", "Past Perfect", "Future Perfect"], ans:1},
+  {q:"'By 2030, she will have graduated.' is:", opts:["Simple Future", "Future Continuous", "Future Perfect", "Present Perfect"], ans:2},
+  {q:"'She ___ studying when I called.'", opts:["is", "was", "has been", "will be"], ans:1},
+  {q:"'I ___ my homework before dinner.'", opts:["finish", "finished", "had finished", "have finish"], ans:2},
+  {q:"Which is PAST PERFECT?", opts:["She sang.", "She was singing.", "She had sung.", "She has sung."], ans:2},
+  {q:"'They ___ football every Sunday.'", opts:["plays", "play", "played", "are played"], ans:1},
+  {q:"'He ___ here since Monday.' (Present Perfect Continuous)", opts:["is working", "was working", "has been working", "had been working"], ans:2},
+  {q:"'I ___ a movie tonight.' (Future)", opts:["watch", "watched", "will watch", "am watched"], ans:2},
+  {q:"'The sun ___ in the east.' (Habitual truth)", opts:["rose", "rises", "has risen", "is rising"], ans:1},
+  {q:"'By the time you arrive, I ___ lunch.'", opts:["cook", "cooked", "will have cooked", "am cooking"], ans:2},
+  {q:"'She ___ her keys.' (Recent past with present result)", opts:["lost", "loses", "has lost", "had lost"], ans:2},
+  {q:"'They ___ for two hours when it started raining.'", opts:["walked", "were walking", "had been walking", "have walked"], ans:2},
+  {q:"Choose the correct sentence:", opts:["He go to market.", "He goes to market.", "He gone to market.", "He going to market."], ans:1},
+  {q:"'I ___ you tomorrow.' (Promise)", opts:["see", "saw", "will see", "am seeing"], ans:2},
+  {q:"'She ___ her work when the boss arrived.'", opts:["finished", "finishes", "had finished", "has finished"], ans:2},
+  {q:"'We ___ in this house since 1990.'", opts:["live", "lived", "have lived", "are living"], ans:2},
+  {q:"'The train ___ at 8 AM.' (Scheduled future)", opts:["leaves", "left", "will leave", "is leaving"], ans:0},
+];
+
+window._topicKey = 'tenses';
+document.addEventListener('DOMContentLoaded', () => {
+  initQuiz(QUESTIONS, 'tenses');
+  // Comments
+  renderComments('tenses', 'cmt-list');
+  const u = typeof Auth !== 'undefined' ? Auth.currentUser() : null;
+  if (!u) {
+    document.getElementById('cmt-login-notice').style.display = 'block';
+    document.getElementById('cmt-form').style.display = 'none';
+  }
+});
+
+function postComment() {
+  submitComment('tenses', 'cmt-list');
+}
+</script>
+</body>
+</html>
