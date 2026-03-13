@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Shah Abdul Latif Academy</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background:#0d1117; }
+    body::before { display:none; }
+
+    .admin-topbar {
+      background:linear-gradient(135deg,#1a0a00,#2d1500);
+      border-bottom:3px solid var(--gold);
+      padding:14px 32px;
+      display:flex; align-items:center; justify-content:space-between;
+      position:sticky; top:0; z-index:200;
+    }
+    .admin-topbar .logo { font-family:'Amiri',serif; font-size:22px; color:var(--gold-lt); font-weight:700; }
+    .admin-topbar .logo span { font-size:14px; color:rgba(255,255,255,0.5); display:block; font-family:'Nunito',sans-serif; font-weight:400; }
+
+    .admin-layout { display:flex; min-height:100vh; }
+
+    .admin-sidebar {
+      width:220px; flex-shrink:0;
+      background:#111720; border-right:1px solid #1e2d3d;
+      position:fixed; top:0; left:0; height:100vh;
+      padding-top:70px; overflow-y:auto;
+    }
+    .admin-sidebar a {
+      display:flex; align-items:center; gap:10px;
+      padding:13px 20px; color:rgba(255,255,255,0.55);
+      text-decoration:none; font-size:14px; font-weight:600;
+      border-left:3px solid transparent; transition:.15s;
+    }
+    .admin-sidebar a:hover, .admin-sidebar a.active {
+      color:var(--gold-lt); background:rgba(201,168,76,0.06);
+      border-left-color:var(--gold);
+    }
+    .sidebar-label {
+      font-size:10px; letter-spacing:1.5px; color:#3d5a7a;
+      text-transform:uppercase; padding:14px 20px 6px; font-weight:700;
+    }
+
+    .admin-main { margin-left:220px; padding:32px; flex:1; }
+
+    /* STAT CARDS */
+    .admin-stats { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:18px; margin-bottom:32px; }
+    .astat {
+      background:#111720; border:1px solid #1e2d3d;
+      border-radius:14px; padding:22px; position:relative; overflow:hidden;
+    }
+    .astat::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; }
+    .astat.gold::before  { background:linear-gradient(90deg,var(--gold),var(--gold-lt)); }
+    .astat.green::before { background:linear-gradient(90deg,var(--emerald),var(--emerald-lt)); }
+    .astat.blue::before  { background:linear-gradient(90deg,#1a6eb5,#2288d8); }
+    .astat.red::before   { background:linear-gradient(90deg,#b51a2c,#d82233); }
+    .astat .lbl { font-size:11px; color:#5a7399; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
+    .astat .val { font-family:'JetBrains Mono',monospace; font-size:32px; font-weight:700; }
+    .astat.gold .val  { color:var(--gold-lt); }
+    .astat.green .val { color:#4ade80; }
+    .astat.blue .val  { color:#60a5fa; }
+    .astat.red .val   { color:#f87171; }
+    .astat .sub { font-size:12px; color:#3d5a7a; margin-top:4px; }
+
+    /* PANEL */
+    .panel {
+      background:#111720; border:1px solid #1e2d3d;
+      border-radius:16px; overflow:hidden; margin-bottom:28px;
+    }
+    .panel-head {
+      padding:16px 24px; background:#0d1421;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid #1e2d3d;
+    }
+    .panel-head h3 { font-family:'Amiri',serif; font-size:18px; color:var(--gold-lt); }
+    .panel-head .count-badge {
+      background:rgba(201,168,76,0.15); border:1px solid var(--gold);
+      color:var(--gold-lt); padding:3px 12px; border-radius:20px; font-size:12px; font-weight:700;
+    }
+    .panel-body { padding:0; }
+
+    /* TABLE */
+    .atable { width:100%; border-collapse:collapse; font-size:14px; }
+    .atable th {
+      background:#0d1421; padding:12px 20px; text-align:left;
+      font-size:11px; letter-spacing:1px; text-transform:uppercase;
+      color:#3d5a7a; font-weight:700; border-bottom:1px solid #1e2d3d;
+    }
+    .atable td { padding:12px 20px; border-bottom:1px solid #141e2e; color:#b0c4de; }
+    .atable tr:last-child td { border-bottom:none; }
+    .atable tr:hover td { background:rgba(201,168,76,0.03); }
+    .atable .tag {
+      display:inline-block; padding:2px 10px; border-radius:20px; font-size:11px; font-weight:700;
+    }
+    .tag-visit { background:rgba(96,165,250,0.12); color:#60a5fa; }
+    .tag-signup { background:rgba(74,222,128,0.12); color:#4ade80; }
+    .tag-comment { background:rgba(201,168,76,0.12); color:var(--gold-lt); }
+
+    /* SECTION TOGGLE */
+    .admin-section { display:none; }
+    .admin-section.active { display:block; }
+
+    /* LOGIN WALL */
+    #adminLogin {
+      min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px;
+      background:#0d1117;
+    }
+    .login-box {
+      background:#111720; border:1px solid #1e2d3d;
+      border-radius:20px; padding:48px 40px; max-width:420px; width:100%;
+      text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    }
+    .login-box .icon { font-size:44px; margin-bottom:16px; display:block; }
+    .login-box h2 { font-family:'Amiri',serif; font-size:26px; color:var(--gold-lt); margin-bottom:6px; }
+    .login-box p { font-size:13px; color:#3d5a7a; margin-bottom:28px; }
+    .admin-input {
+      width:100%; padding:13px 16px; background:#0d1117; border:1px solid #1e2d3d;
+      border-radius:10px; color:#e2eaf7; font-family:'Nunito',sans-serif; font-size:15px;
+      outline:none; transition:.2s; margin-bottom:14px;
+    }
+    .admin-input:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,168,76,0.1); }
+    .btn-admin-login {
+      width:100%; padding:14px; background:linear-gradient(135deg,var(--gold),var(--gold-lt));
+      border:none; border-radius:10px; color:var(--ink); font-family:'Nunito',sans-serif;
+      font-size:15px; font-weight:800; cursor:pointer; transition:.2s;
+    }
+    .btn-admin-login:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(201,168,76,0.3); }
+    #adminErr { color:#f87171; font-size:13px; margin-top:10px; display:none; }
+
+    @media(max-width:768px){
+      .admin-sidebar { display:none; }
+      .admin-main { margin-left:0; padding:16px; }
+      .admin-stats { grid-template-columns:1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ADMIN LOGIN WALL -->
+<div id="adminLogin">
+  <div class="login-box">
+    <span class="icon">🛡️</span>
+    <h2>Admin Access</h2>
+    <p>Shah Abdul Latif Academy — Admin Dashboard<br>By Safdar Junejo</p>
+    <input class="admin-input" type="email" id="adEmail" placeholder="Admin email" value="safdar@sala.edu.pk">
+    <input class="admin-input" type="password" id="adPwd" placeholder="Admin password" onkeydown="if(event.key==='Enter')adminLogin()">
+    <button class="btn-admin-login" onclick="adminLogin()">🔑 Access Dashboard</button>
+    <p id="adminErr">Invalid admin credentials.</p>
+  </div>
+</div>
+
+<!-- ADMIN DASHBOARD (hidden until login) -->
+<div id="adminDashboard" style="display:none;">
+  <div class="admin-topbar">
+    <div class="logo">
+      🛡️ Admin Dashboard
+      <span>Shah Abdul Latif Academy — Safdar Junejo</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="font-size:13px;color:rgba(255,255,255,0.4);" id="lastRefresh"></span>
+      <button onclick="loadDashboard()" style="padding:8px 16px;background:rgba(201,168,76,0.15);border:1px solid var(--gold);border-radius:8px;color:var(--gold-lt);font-size:13px;font-weight:700;cursor:pointer;">🔄 Refresh</button>
+      <button onclick="adminLogout()" style="padding:8px 16px;background:rgba(248,113,113,0.1);border:1px solid #f87171;border-radius:8px;color:#f87171;font-size:13px;font-weight:700;cursor:pointer;">Logout</button>
+    </div>
+  </div>
+
+  <div class="admin-layout">
+    <nav class="admin-sidebar">
+      <div class="sidebar-label">Overview</div>
+      <a href="#" class="active" onclick="showAdminSec('overview')">📊 Overview</a>
+      <a href="#" onclick="showAdminSec('visitors')">👁️ Visitors</a>
+      <a href="#" onclick="showAdminSec('signups')">🆕 Signups</a>
+      <div class="sidebar-label">Content</div>
+      <a href="#" onclick="showAdminSec('users')">👥 All Students</a>
+      <a href="#" onclick="showAdminSec('comments')">💬 Comments</a>
+      <div class="sidebar-label">Site</div>
+      <a href="index.html" target="_blank">🌐 View Site</a>
+    </nav>
+
+    <main class="admin-main">
+
+      <!-- OVERVIEW -->
+      <div id="sec-overview" class="admin-section active">
+        <h2 style="font-family:'Amiri',serif;font-size:26px;color:var(--gold-lt);margin-bottom:24px;">📊 Dashboard Overview</h2>
+        <div class="admin-stats">
+          <div class="astat gold">
+            <div class="lbl">Total Visitors</div>
+            <div class="val" id="st-visits">0</div>
+            <div class="sub">All page visits</div>
+          </div>
+          <div class="astat green">
+            <div class="lbl">Registered Students</div>
+            <div class="val" id="st-students">0</div>
+            <div class="sub">Signed up accounts</div>
+          </div>
+          <div class="astat blue">
+            <div class="lbl">Total Comments</div>
+            <div class="val" id="st-comments">0</div>
+            <div class="sub">Math + English</div>
+          </div>
+          <div class="astat red">
+            <div class="lbl">Today's Visits</div>
+            <div class="val" id="st-today">0</div>
+            <div class="sub">Last 24 hours</div>
+          </div>
+        </div>
+
+        <!-- RECENT ACTIVITY -->
+        <div class="panel">
+          <div class="panel-head"><h3>🕐 Recent Activity</h3></div>
+          <div class="panel-body">
+            <table class="atable">
+              <thead><tr><th>Type</th><th>Name / Page</th><th>Time</th><th>Details</th></tr></thead>
+              <tbody id="recentActivity"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- VISITORS -->
+      <div id="sec-visitors" class="admin-section">
+        <h2 style="font-family:'Amiri',serif;font-size:26px;color:var(--gold-lt);margin-bottom:24px;">👁️ Visitor Log</h2>
+        <div class="panel">
+          <div class="panel-head">
+            <h3>All Visits</h3>
+            <span class="count-badge" id="visit-count">0</span>
+          </div>
+          <div class="panel-body" style="max-height:600px;overflow-y:auto;">
+            <table class="atable">
+              <thead><tr><th>#</th><th>Page</th><th>Time</th><th>Referrer</th><th>Browser</th></tr></thead>
+              <tbody id="visitorTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIGNUPS -->
+      <div id="sec-signups" class="admin-section">
+        <h2 style="font-family:'Amiri',serif;font-size:26px;color:var(--gold-lt);margin-bottom:24px;">🆕 Student Signups</h2>
+        <div class="panel">
+          <div class="panel-head">
+            <h3>New Registrations</h3>
+            <span class="count-badge" id="signup-count">0</span>
+          </div>
+          <div class="panel-body">
+            <table class="atable">
+              <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Signed Up</th></tr></thead>
+              <tbody id="signupTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ALL STUDENTS -->
+      <div id="sec-users" class="admin-section">
+        <h2 style="font-family:'Amiri',serif;font-size:26px;color:var(--gold-lt);margin-bottom:24px;">👥 All Students</h2>
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Registered Students</h3>
+            <span class="count-badge" id="user-count">0</span>
+          </div>
+          <div class="panel-body">
+            <table class="atable">
+              <thead><tr><th>#</th><th>Name</th><th>Email</th><th>XP</th><th>Quizzes</th><th>Joined</th></tr></thead>
+              <tbody id="userTable"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMMENTS -->
+      <div id="sec-comments" class="admin-section">
+        <h2 style="font-family:'Amiri',serif;font-size:26px;color:var(--gold-lt);margin-bottom:24px;">💬 All Comments</h2>
+        <div class="panel" style="margin-bottom:20px;">
+          <div class="panel-head"><h3>Mathematics Comments</h3><span class="count-badge" id="math-comment-count">0</span></div>
+          <div class="panel-body">
+            <table class="atable">
+              <thead><tr><th>Author</th><th>Comment</th><th>Time</th><th>Action</th></tr></thead>
+              <tbody id="mathComments"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><h3>English Comments</h3><span class="count-badge" id="eng-comment-count">0</span></div>
+          <div class="panel-body">
+            <table class="atable">
+              <thead><tr><th>Author</th><th>Comment</th><th>Time</th><th>Action</th></tr></thead>
+              <tbody id="engComments"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<script src="app.js"></script>
+<script>
+function adminLogin() {
+  const email = document.getElementById('adEmail').value.trim();
+  const pwd   = document.getElementById('adPwd').value;
+  if (email === ADMIN_EMAIL && pwd === ADMIN_PASSWORD) {
+    document.getElementById('adminLogin').style.display = 'none';
+    document.getElementById('adminDashboard').style.display = 'block';
+    loadDashboard();
+  } else {
+    document.getElementById('adminErr').style.display = 'block';
+  }
+}
+
+function adminLogout() {
+  document.getElementById('adminLogin').style.display = 'flex';
+  document.getElementById('adminDashboard').style.display = 'none';
+}
+
+function showAdminSec(id) {
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  document.querySelectorAll('.admin-sidebar a').forEach((a,i)=>{
+    a.classList.toggle('active', a.getAttribute('onclick') && a.getAttribute('onclick').includes("'"+id+"'"));
+  });
+}
+
+function loadDashboard() {
+  document.getElementById('lastRefresh').textContent = 'Updated: '+new Date().toLocaleTimeString();
+
+  const visits   = Store.get('visits',[]);
+  const students = Auth.getUsers();
+  const signups  = Store.get('signups',[]);
+  const mathComm = Comments.get('math');
+  const engComm  = Comments.get('english');
+
+  const today = new Date();
+  const todayVisits = visits.filter(v => {
+    const d = new Date(v.time);
+    return d.getDate()===today.getDate() && d.getMonth()===today.getMonth() && d.getFullYear()===today.getFullYear();
+  });
+
+  // Stats
+  document.getElementById('st-visits').textContent   = visits.length;
+  document.getElementById('st-students').textContent = students.length;
+  document.getElementById('st-comments').textContent = mathComm.length + engComm.length;
+  document.getElementById('st-today').textContent    = todayVisits.length;
+
+  // Visit count
+  document.getElementById('visit-count').textContent = visits.length;
+
+  // Signup count
+  document.getElementById('signup-count').textContent = signups.length;
+  document.getElementById('user-count').textContent   = students.length;
+  document.getElementById('math-comment-count').textContent = mathComm.length;
+  document.getElementById('eng-comment-count').textContent  = engComm.length;
+
+  // Recent activity (mix of visits + signups + comments)
+  const activity = [
+    ...visits.slice(-20).map(v=>({type:'visit',label:v.page,time:v.time,detail:v.referrer})),
+    ...signups.slice(-10).map(s=>({type:'signup',label:s.name,time:s.time,detail:s.email})),
+    ...mathComm.slice(-10).map(c=>({type:'comment',label:c.author,time:c.time,detail:'Math: '+c.text.substring(0,40)})),
+    ...engComm.slice(-10).map(c=>({type:'comment',label:c.author,time:c.time,detail:'Eng: '+c.text.substring(0,40)})),
+  ].sort((a,b)=>new Date(b.time)-new Date(a.time)).slice(0,30);
+
+  document.getElementById('recentActivity').innerHTML = activity.map((a,i)=>`
+    <tr>
+      <td><span class="tag tag-${a.type}">${a.type}</span></td>
+      <td style="color:#e2eaf7;font-weight:600;">${escHtml(a.label)}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;">${timeAgo(a.time)}</td>
+      <td style="color:#5a7399;font-size:13px;">${escHtml(a.detail||'')}</td>
+    </tr>`).join('') || '<tr><td colspan="4" style="text-align:center;color:#3d5a7a;padding:24px;">No activity yet.</td></tr>';
+
+  // Visitor table
+  document.getElementById('visitorTable').innerHTML = visits.slice().reverse().map((v,i)=>`
+    <tr>
+      <td style="color:#3d5a7a;">${visits.length-i}</td>
+      <td style="color:#60a5fa;">${escHtml(v.page)}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5a7399;">${new Date(v.time).toLocaleString()}</td>
+      <td style="color:#5a7399;">${escHtml(v.referrer||'Direct')}</td>
+      <td style="color:#5a7399;font-size:12px;">${escHtml(v.userAgent||'').substring(0,50)}…</td>
+    </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;color:#3d5a7a;padding:24px;">No visitors yet.</td></tr>';
+
+  // Signup table
+  document.getElementById('signupTable').innerHTML = signups.slice().reverse().map((s,i)=>`
+    <tr>
+      <td style="color:#3d5a7a;">${signups.length-i}</td>
+      <td style="color:#4ade80;font-weight:600;">${escHtml(s.name)}</td>
+      <td style="color:#5a7399;">${escHtml(s.email)}</td>
+      <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#5a7399;">${new Date(s.time).toLocaleString()}</td>
+    </tr>`).join('') || '<tr><td colspan="4" style="text-align:center;color:#3d5a7a;padding:24px;">No signups yet.</td></tr>';
+
+  // Users table
+  document.getElementById('userTable').innerHTML = students.map((u,i)=>`
+    <tr>
+      <td style="color:#3d5a7a;">${i+1}</td>
+      <td style="color:#e2eaf7;font-weight:600;">${escHtml(u.name)}</td>
+      <td style="color:#5a7399;">${escHtml(u.email)}</td>
+      <td style="color:var(--gold-lt);font-family:'JetBrains Mono',monospace;">${u.xp||0}</td>
+      <td style="color:#60a5fa;">${u.quizzesDone||0}</td>
+      <td style="color:#5a7399;font-size:12px;">${new Date(u.joinedAt).toLocaleDateString()}</td>
+    </tr>`).join('') || '<tr><td colspan="6" style="text-align:center;color:#3d5a7a;padding:24px;">No students yet.</td></tr>';
+
+  // Comment tables
+  function buildCommentTable(comments, id) {
+    document.getElementById(id).innerHTML = comments.slice().reverse().map((c,i)=>`
+      <tr>
+        <td style="color:#e2eaf7;font-weight:600;">${escHtml(c.author)}</td>
+        <td style="color:#b0c4de;">${escHtml(c.text.substring(0,80))}${c.text.length>80?'…':''}</td>
+        <td style="font-size:12px;color:#5a7399;">${new Date(c.time).toLocaleString()}</td>
+        <td><button onclick="deleteComment('${id==='mathComments'?'math':'english'}',${c.id})" style="background:rgba(248,113,113,0.1);border:1px solid #f87171;color:#f87171;padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;font-weight:700;">Delete</button></td>
+      </tr>`).join('') || '<tr><td colspan="4" style="text-align:center;color:#3d5a7a;padding:24px;">No comments yet.</td></tr>';
+  }
+  buildCommentTable(mathComm, 'mathComments');
+  buildCommentTable(engComm,  'engComments');
+}
+
+function deleteComment(section, id) {
+  const key = 'sala_comments_'+section;
+  const arr = Store.get('comments_'+section,[]);
+  Store.set('comments_'+section, arr.filter(c=>c.id!==id));
+  loadDashboard();
+}
+
+// Auto-show dashboard if admin already logged in
+document.addEventListener('DOMContentLoaded', ()=>{
+  const u = Auth.currentUser();
+  if (u && u.isAdmin) {
+    document.getElementById('adminLogin').style.display='none';
+    document.getElementById('adminDashboard').style.display='block';
+    loadDashboard();
+  }
+});
+</script>
+</body>
+        </html>
+  
