@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Quiz — Shah Abdul Latif Academy</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .quiz-header-banner {
+      background:linear-gradient(135deg,#1a3a5c,#0d2240);
+      border-radius:20px; padding:36px 32px; text-align:center;
+      margin-bottom:36px; color:var(--white);
+    }
+    .quiz-header-banner .big { font-size:52px; display:block; margin-bottom:10px; }
+    .quiz-header-banner h1 { font-family:'Amiri',serif; font-size:32px; font-weight:700; margin-bottom:8px; }
+    .quiz-header-banner p { font-size:14px; color:rgba(255,255,255,0.72); }
+    .topic-badge {
+      display:inline-block; padding:3px 12px; border-radius:20px;
+      background:rgba(201,168,76,0.15); border:1px solid var(--gold);
+      color:var(--gold-lt); font-size:12px; font-weight:700; letter-spacing:0.5px; margin-bottom:14px;
+    }
+  </style>
+</head>
+<body>
+<div class="topbar">✿ <span>Shah Abdul Latif Academy</span> — By Safdar Junejo ✿</div>
+<header>
+  <span class="header-ornament">✿ ❀ ✿</span>
+  <div class="academy-name">Shah Abdul Latif Academy</div>
+  <div class="academy-by">By Safdar Junejo</div>
+</header>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html">🏠 Home</a>
+    <a href="math-quiz.html">➕ Math Quiz</a>
+    <a href="english-quiz.html">📝 English Quiz</a>
+    <a href="updates.html">📢 Updates</a>
+    <a href="about.html">ℹ️ About Us</a>
+    <a href="privacy.html">🔒 Privacy</a>
+    <a href="contact.html">📩 Contact</a>
+    <span id="nav-auth-btn" style="display:contents;"></span>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <div class="quiz-header-banner">
+    <span class="big">📝</span>
+    <h1>English Quiz</h1>
+    <p>Grammar · Vocabulary · Comprehension · Writing — Test your English skills!</p>
+  </div>
+
+  <div class="quiz-wrap">
+
+    <!-- TOPIC SELECTOR -->
+    <div id="topicSelector">
+      <div class="section-head">
+        <span class="ornament">❀ ✾ ❀</span>
+        <h2>Choose a Topic</h2>
+        <div class="divider"></div>
+      </div>
+      <div class="quiz-topic-grid">
+        <div class="topic-card" onclick="selectTopic('grammar')">
+          <span class="icon">📖</span>
+          <div class="name">Grammar</div>
+          <div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('vocabulary')">
+          <span class="icon">🔤</span>
+          <div class="name">Vocabulary</div>
+          <div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('comprehension')">
+          <span class="icon">🧠</span>
+          <div class="name">Comprehension</div>
+          <div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('writing')">
+          <span class="icon">✍️</span>
+          <div class="name">Writing Skills</div>
+          <div class="count">8 Questions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ AREA -->
+    <div id="quizArea" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+        <button class="btn btn-outline" style="padding:8px 18px;" onclick="resetQuiz()">← Back to Topics</button>
+        <span class="topic-badge" id="activeTopic">Topic</span>
+      </div>
+      <div class="question-card">
+        <div class="q-progress"><div class="q-progress-fill" id="qFill" style="width:0%"></div></div>
+        <div class="q-meta" id="qMeta">Question 1 of 8</div>
+        <div class="q-text" id="qText">Loading…</div>
+        <div class="options" id="qOpts"></div>
+        <div class="quiz-footer">
+          <div class="score-tag">⭐ Score: <span id="qScore">0</span></div>
+          <button class="btn btn-primary" id="qNext" onclick="nextQ()" disabled>Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="quizResult" style="display:none;" class="question-card">
+      <div class="result-box">
+        <div class="result-ring">
+          <div class="result-num" id="rNum">0</div>
+          <div class="result-den" id="rDen">/ 8</div>
+        </div>
+        <div class="result-title" id="rTitle">Well Done!</div>
+        <div class="result-msg" id="rMsg">You completed the quiz.</div>
+        <div class="result-xp" id="rXP">+0 XP</div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-outline" onclick="resetQuiz()">🔄 Try Another Topic</button>
+          <button class="btn btn-primary" onclick="location.href='index.html'">🏠 Home</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMENT SECTION -->
+    <div class="comments-section">
+      <h3>💬 Discussion — English</h3>
+      <div id="comment-login-notice-eng" style="display:none;" class="alert alert-info">
+        🔑 <a href="login.html">Sign in</a> to leave a comment.
+      </div>
+      <div id="comment-form-eng" style="margin-bottom:24px;">
+        <div class="form-group">
+          <label>Your Comment</label>
+          <textarea id="comment-input-english" placeholder="Share a tip, ask a question, or help a classmate with English…" rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="submitComment('english','comment-list-english')">Post Comment</button>
+      </div>
+      <div id="comment-list-english"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">✿ Shah Abdul Latif Academy ✿</div>
+  <p>By <strong style="color:var(--gold-lt)">Safdar Junejo</strong></p>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="math-quiz.html">Math Quiz</a>
+    <a href="english-quiz.html">English Quiz</a><a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a><a href="contact.html">Contact</a>
+  </div>
+  <p style="margin-top:10px;font-size:12px;">© 2026 Shah Abdul Latif Academy.</p>
+</footer>
+
+<script src="app.js"></script>
+<script>
+const ENG_QUESTIONS = {
+  grammar: [
+    { q:"Which sentence is grammatically correct?", opts:["She don't like apples.","She doesn't likes apples.","She doesn't like apples.","She not like apples."], ans:2 },
+    { q:"'They're going to the library.' — What does 'They're' mean?", opts:["They are","Their","There","They were"], ans:0 },
+    { q:"Choose the correct plural of 'phenomenon':", opts:["Phenomenons","Phenomenas","Phenomena","Phenomenes"], ans:2 },
+    { q:"Which word is a conjunction?", opts:["Quickly","Beautiful","Although","Jumped"], ans:2 },
+    { q:"Passive voice of 'She wrote the report':", opts:["The report was written by her.","She had written the report.","The report she wrote.","She writes the report."], ans:0 },
+    { q:"Which is the correct form? 'Neither he nor they ___ ready.'", opts:["was","is","are","were"], ans:2 },
+    { q:"A semicolon is used to:", opts:["End a sentence","Join two related independent clauses","Show possession","Introduce a list"], ans:1 },
+    { q:"'The book which I read was great.' — 'which' is a:", opts:["Preposition","Relative pronoun","Conjunction","Adverb"], ans:1 },
+  ],
+  vocabulary: [
+    { q:"'Ephemeral' means:", opts:["Lasting forever","Very large","Short-lived","Very cold"], ans:2 },
+    { q:"A synonym for 'verbose' is:", opts:["Concise","Wordy","Brief","Silent"], ans:1 },
+    { q:"'Benevolent' means:", opts:["Kind and generous","Selfish","Angry","Fearful"], ans:0 },
+    { q:"An antonym of 'ancient' is:", opts:["Old","Historic","Modern","Aged"], ans:2 },
+    { q:"'Ubiquitous' means:", opts:["Rare","Present everywhere","Hidden","Dangerous"], ans:1 },
+    { q:"The word 'loquacious' describes someone who is:", opts:["Quiet","Very talkative","Intelligent","Lazy"], ans:1 },
+    { q:"'Ameliorate' means:", opts:["Make worse","Stay the same","Make better","Destroy"], ans:2 },
+    { q:"A word that imitates a sound (like 'buzz') is called:", opts:["Metaphor","Onomatopoeia","Simile","Alliteration"], ans:1 },
+  ],
+  comprehension: [
+    { q:"In reading comprehension, the 'main idea' is:", opts:["A supporting detail","The title","The central point the author makes","The last sentence"], ans:2 },
+    { q:"An 'inference' is:", opts:["A direct quote","A conclusion drawn from evidence","A dictionary definition","The author's name"], ans:1 },
+    { q:"What is a 'topic sentence'?", opts:["The last sentence of a paragraph","The sentence that states the paragraph's main idea","A question","A transition word"], ans:1 },
+    { q:"'Context clues' help you:", opts:["Find the author","Understand unfamiliar words","Count sentences","Identify the title"], ans:1 },
+    { q:"Which text structure is used in a 'compare and contrast' essay?", opts:["Chronological","Cause and Effect","Comparison","Problem-Solution"], ans:2 },
+    { q:"A 'thesis statement' is found in the:", opts:["Conclusion","Body paragraph","Introduction","Bibliography"], ans:2 },
+    { q:"'Figurative language' means:", opts:["Exact literal meaning","Language not meant literally","Scientific writing","Grammar rules"], ans:1 },
+    { q:"An 'abstract' in an academic paper is:", opts:["The conclusion","A brief summary","The bibliography","A footnote"], ans:1 },
+  ],
+  writing: [
+    { q:"Which literary device is 'the wind whispered'?", opts:["Simile","Metaphor","Personification","Alliteration"], ans:2 },
+    { q:"A simile uses which words to compare?", opts:["Is / are","Like / as","Because / since","And / or"], ans:1 },
+    { q:"In a formal essay, first-person pronouns (I, me) should be:", opts:["Used freely","Avoided","Required","Doubled"], ans:1 },
+    { q:"Which is the most effective topic sentence?", opts:["This essay is about climate.","Climate change affects agriculture in many ways.","There are things about climate.","Climate."], ans:1 },
+    { q:"A 'hook' in an introduction is meant to:", opts:["Summarize the essay","State the thesis","Grab the reader's attention","List references"], ans:2 },
+    { q:"Parallel structure means:", opts:["Using rhyming words","Using the same grammatical form in a series","Repeating the thesis","Writing short sentences"], ans:1 },
+    { q:"Which transition shows contrast?", opts:["Furthermore","In addition","However","Similarly"], ans:2 },
+    { q:"'Peer review' in academic writing means:", opts:["Writing a review of a movie","Getting feedback from classmates or colleagues","Reviewing your own work","Publishing online"], ans:1 },
+  ]
+};
+
+let currentTopic = null, questions = [], qIdx = 0, score = 0, answered = false;
+
+function selectTopic(topic) {
+  currentTopic = topic;
+  questions = [...ENG_QUESTIONS[topic]].sort(()=>Math.random()-.5);
+  qIdx = 0; score = 0;
+  document.getElementById('topicSelector').style.display = 'none';
+  document.getElementById('quizArea').style.display = 'block';
+  document.getElementById('quizResult').style.display = 'none';
+  const labels = {grammar:'📖 Grammar',vocabulary:'🔤 Vocabulary',comprehension:'🧠 Comprehension',writing:'✍️ Writing Skills'};
+  document.getElementById('activeTopic').textContent = labels[topic];
+  loadQ();
+}
+
+function loadQ() {
+  if (qIdx >= questions.length) { showResult(); return; }
+  const q = questions[qIdx];
+  const total = questions.length;
+  document.getElementById('qMeta').textContent = `Question ${qIdx+1} of ${total}`;
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('qFill').style.width = ((qIdx/total)*100)+'%';
+  document.getElementById('qScore').textContent = score;
+  document.getElementById('qNext').disabled = true;
+  answered = false;
+  const letters = ['A','B','C','D'];
+  document.getElementById('qOpts').innerHTML = q.opts.map((o,i)=>`
+    <div class="opt" onclick="pickOpt(${i},this)">
+      <span class="opt-letter">${letters[i]}</span>${escHtml(o)}
+    </div>`).join('');
+}
+
+function pickOpt(idx, el) {
+  if (answered) return;
+  answered = true;
+  const q = questions[qIdx];
+  document.querySelectorAll('.opt').forEach(o=>o.classList.add('disabled'));
+  if (idx === q.ans) { el.classList.add('correct'); score++; }
+  else { el.classList.add('wrong'); document.querySelectorAll('.opt')[q.ans].classList.add('correct'); }
+  document.getElementById('qScore').textContent = score;
+  document.getElementById('qNext').disabled = false;
+}
+
+function nextQ() { qIdx++; loadQ(); }
+
+function showResult() {
+  document.getElementById('quizArea').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'block';
+  const total = questions.length;
+  const pct = Math.round((score/total)*100);
+  const xp  = score * 20;
+  document.getElementById('rNum').textContent  = score;
+  document.getElementById('rDen').textContent  = '/ '+total;
+  document.getElementById('rTitle').textContent = pct>=80?'🌟 Excellent!':pct>=60?'👏 Good Work!':'💪 Keep Practicing!';
+  document.getElementById('rMsg').textContent   = `You scored ${pct}% on ${currentTopic.charAt(0).toUpperCase()+currentTopic.slice(1)}.`;
+  document.getElementById('rXP').textContent    = `+${xp} XP Earned`;
+  const u = Auth.currentUser();
+  if (u && !u.isAdmin) {
+    u.xp = (u.xp||0) + xp;
+    u.quizzesDone = (u.quizzesDone||0) + 1;
+    u.engScore  = (u.engScore||0)  + score;
+    u.engTotal  = (u.engTotal||0)  + total;
+    Auth.updateUser(u);
+  }
+  showToast(`+${xp} XP earned! 🎉`,'gold');
+}
+
+function resetQuiz() {
+  document.getElementById('topicSelector').style.display = 'block';
+  document.getElementById('quizArea').style.display = 'none';
+  document.getElementById('quizResult').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderComments('english','comment-list-english');
+  const u = Auth.currentUser();
+  if (!u) {
+    document.getElementById('comment-login-notice-eng').style.display = 'flex';
+    document.getElementById('comment-form-eng').style.display = 'none';
+  }
+});
+</script>
+</body>
+  </html>
+
