@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mathematics Quiz — Shah Abdul Latif Academy</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .quiz-header-banner {
+      background:linear-gradient(135deg,var(--emerald),#004d33);
+      border-radius:20px; padding:36px 32px; text-align:center;
+      margin-bottom:36px; color:var(--white);
+    }
+    .quiz-header-banner .big { font-size:52px; display:block; margin-bottom:10px; }
+    .quiz-header-banner h1 { font-family:'Amiri',serif; font-size:32px; font-weight:700; margin-bottom:8px; }
+    .quiz-header-banner p { font-size:14px; color:rgba(255,255,255,0.72); }
+    .topic-badge {
+      display:inline-block; padding:3px 12px; border-radius:20px;
+      background:rgba(201,168,76,0.15); border:1px solid var(--gold);
+      color:var(--gold-lt); font-size:12px; font-weight:700; letter-spacing:0.5px; margin-bottom:14px;
+    }
+    .quiz-topic-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(165px,1fr));
+      gap:13px; margin-bottom:32px;
+    }
+    .topic-card {
+      background:var(--white); border:2px solid var(--border);
+      border-radius:14px; padding:16px 12px; text-align:center;
+      cursor:pointer; transition:.2s;
+    }
+    .topic-card:hover,.topic-card.active {
+      border-color:var(--emerald); background:rgba(0,102,68,0.05);
+      transform:translateY(-3px); box-shadow:var(--shadow);
+    }
+    .topic-card .icon  { font-size:26px; margin-bottom:6px; display:block; }
+    .topic-card .tnum  { font-size:10px; color:var(--muted); font-weight:700; letter-spacing:1px; text-transform:uppercase; }
+    .topic-card .name  { font-weight:800; font-size:13px; color:var(--emerald); line-height:1.3; margin-top:3px; }
+    .topic-card .count { font-size:11px; color:var(--muted); margin-top:2px; }
+  </style>
+</head>
+<body>
+<div class="topbar">✿ <span>Shah Abdul Latif Academy</span> — By Safdar Junejo ✿</div>
+<header>
+  <span class="header-ornament">✿ ❀ ✿</span>
+  <div class="academy-name">Shah Abdul Latif Academy</div>
+  <div class="academy-by">By Safdar Junejo</div>
+</header>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html">🏠 Home</a>
+    <a href="math-quiz.html">➕ Math Quiz</a>
+    <a href="english-quiz.html">📝 English Quiz</a>
+    <a href="updates.html">📢 Updates</a>
+    <a href="about.html">ℹ️ About Us</a>
+    <a href="privacy.html">🔒 Privacy</a>
+    <a href="contact.html">📩 Contact</a>
+    <span id="nav-auth-btn" style="display:contents;"></span>
+  </div>
+</nav>
+
+<div class="wrapper">
+  <div class="quiz-header-banner">
+    <span class="big">➕</span>
+    <h1>Mathematics Quiz</h1>
+    <p>17 Topics · 136 Questions · From Number System to Data Interpretation!</p>
+  </div>
+
+  <div class="quiz-wrap">
+
+    <!-- TOPIC SELECTOR -->
+    <div id="topicSelector">
+      <div class="section-head">
+        <span class="ornament">❀ ✾ ❀</span>
+        <h2>Choose a Topic</h2>
+        <div class="divider"></div>
+        <p>17 mathematics topics — carefully crafted for college-level students</p>
+      </div>
+      <div class="quiz-topic-grid">
+        <div class="topic-card" onclick="selectTopic('numbers')">
+          <span class="icon">🔢</span><div class="tnum">Topic 1</div>
+          <div class="name">Number System</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('fractions')">
+          <span class="icon">½</span><div class="tnum">Topic 2</div>
+          <div class="name">Fractions & Decimals</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('ratio')">
+          <span class="icon">⚖️</span><div class="tnum">Topic 3</div>
+          <div class="name">Ratio & Proportion</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('percentages')">
+          <span class="icon">💯</span><div class="tnum">Topic 4</div>
+          <div class="name">Percentages</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('financial')">
+          <span class="icon">💰</span><div class="tnum">Topic 5</div>
+          <div class="name">Financial Arithmetic</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('expressions')">
+          <span class="icon">🔡</span><div class="tnum">Topic 6</div>
+          <div class="name">Algebraic Expressions</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('factorization')">
+          <span class="icon">✂️</span><div class="tnum">Topic 7</div>
+          <div class="name">Factorization</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('linear')">
+          <span class="icon">📏</span><div class="tnum">Topic 8</div>
+          <div class="name">Linear Equations</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('quadratic')">
+          <span class="icon">📈</span><div class="tnum">Topic 9</div>
+          <div class="name">Quadratic Equations</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('inequalities')">
+          <span class="icon">≥</span><div class="tnum">Topic 10</div>
+          <div class="name">Inequalities</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('functions')">
+          <span class="icon">🔁</span><div class="tnum">Topic 11</div>
+          <div class="name">Relations & Functions</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('coordinate')">
+          <span class="icon">🗺️</span><div class="tnum">Topic 12</div>
+          <div class="name">Coordinate Geometry</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('geometry')">
+          <span class="icon">📐</span><div class="tnum">Topic 13</div>
+          <div class="name">Geometry</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('trigonometry')">
+          <span class="icon">📡</span><div class="tnum">Topic 14</div>
+          <div class="name">Trigonometry (Basic)</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('sets')">
+          <span class="icon">🔵</span><div class="tnum">Topic 15</div>
+          <div class="name">Sets</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('wordproblems')">
+          <span class="icon">📖</span><div class="tnum">Topic 16</div>
+          <div class="name">Word Problems</div><div class="count">8 Questions</div>
+        </div>
+        <div class="topic-card" onclick="selectTopic('datainterpretation')">
+          <span class="icon">📊</span><div class="tnum">Topic 17</div>
+          <div class="name">Data Interpretation</div><div class="count">8 Questions</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QUIZ AREA -->
+    <div id="quizArea" style="display:none;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:10px;">
+        <button class="btn btn-outline" style="padding:8px 18px;" onclick="resetQuiz()">← Back to Topics</button>
+        <span class="topic-badge" id="activeTopic">Topic</span>
+      </div>
+      <div class="question-card">
+        <div class="q-progress"><div class="q-progress-fill" id="qFill" style="width:0%"></div></div>
+        <div class="q-meta" id="qMeta">Question 1 of 8</div>
+        <div class="q-text" id="qText">Loading…</div>
+        <div class="options" id="qOpts"></div>
+        <div class="quiz-footer">
+          <div class="score-tag">⭐ Score: <span id="qScore">0</span></div>
+          <button class="btn btn-primary" id="qNext" onclick="nextQ()" disabled>Next →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="quizResult" style="display:none;" class="question-card">
+      <div class="result-box">
+        <div class="result-ring">
+          <div class="result-num" id="rNum">0</div>
+          <div class="result-den" id="rDen">/ 8</div>
+        </div>
+        <div class="result-title" id="rTitle">Well Done!</div>
+        <div class="result-msg" id="rMsg">You completed the quiz.</div>
+        <div class="result-xp" id="rXP">+0 XP</div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button class="btn btn-outline" onclick="resetQuiz()">🔄 Try Another Topic</button>
+          <button class="btn btn-primary" onclick="location.href='index.html'">🏠 Home</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMENT SECTION -->
+    <div class="comments-section">
+      <h3>💬 Discussion — Mathematics</h3>
+      <div id="comment-login-notice" style="display:none;" class="alert alert-info">
+        🔑 <a href="login.html">Sign in</a> to leave a comment.
+      </div>
+      <div id="comment-form-math" style="margin-bottom:24px;">
+        <div class="form-group">
+          <label>Your Comment</label>
+          <textarea id="comment-input-math" placeholder="Share your thoughts, ask a question, or help a classmate…" rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="submitComment('math','comment-list-math')">Post Comment</button>
+      </div>
+      <div id="comment-list-math"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">✿ Shah Abdul Latif Academy ✿</div>
+  <p>By <strong style="color:var(--gold-lt)">Safdar Junejo</strong></p>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="math-quiz.html">Math Quiz</a>
+    <a href="english-quiz.html">English Quiz</a><a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a><a href="contact.html">Contact</a>
+  </div>
+  <p style="margin-top:10px;font-size:12px;">© 2026 Shah Abdul Latif Academy.</p>
+</footer>
+
+<script src="app.js"></script>
+<script>
+const MATH_QUESTIONS = {
+  numbers:[
+    {q:"Which of the following is an irrational number?",opts:["½","√2","0.75","−3"],ans:1},
+    {q:"What is the absolute value of −15?",opts:["−15","15","0","1"],ans:1},
+    {q:"Which number is both even and prime?",opts:["1","4","2","6"],ans:2},
+    {q:"What is the HCF of 12 and 18?",opts:["3","6","9","12"],ans:1},
+    {q:"What is the LCM of 4 and 6?",opts:["10","12","18","24"],ans:1},
+    {q:"Which is the smallest prime number?",opts:["0","1","2","3"],ans:2},
+    {q:"−7 × −3 = ?",opts:["−21","21","10","−10"],ans:1},
+    {q:"What is 2⁵?",opts:["10","16","32","64"],ans:2},
+  ],
+  fractions:[
+    {q:"½ + ¼ = ?",opts:["2/6","3/4","1/3","2/3"],ans:1},
+    {q:"What is 0.375 as a fraction?",opts:["3/8","3/7","3/5","1/3"],ans:0},
+    {q:"Simplify: 18/24",opts:["2/3","3/4","4/5","5/6"],ans:1},
+    {q:"¾ ÷ ⅜ = ?",opts:["1","9/32","2","3/2"],ans:2},
+    {q:"Convert 1.25 to a fraction:",opts:["5/4","6/5","4/3","7/5"],ans:0},
+    {q:"Which fraction is greater: 3/5 or 5/8?",opts:["3/5","5/8","Equal","Cannot compare"],ans:1},
+    {q:"2½ × 4 = ?",opts:["8","9","10","12"],ans:2},
+    {q:"0.6 as a fraction in lowest terms:",opts:["6/10","3/5","2/3","12/20"],ans:1},
+  ],
+  ratio:[
+    {q:"Ratio A:B = 3:5, total = 40. Find B.",opts:["15","20","25","10"],ans:2},
+    {q:"2 cups flour for 3 cups water. Flour for 9 cups water?",opts:["4","5","6","7"],ans:2},
+    {q:"Express 45:75 in simplest form:",opts:["3:4","3:5","5:9","9:15"],ans:1},
+    {q:"5 workers build a wall in 12 days. Days for 3 workers?",opts:["15","18","20","24"],ans:2},
+    {q:"Mean proportion of 4 and 16 is:",opts:["6","8","10","12"],ans:1},
+    {q:"A:B=2:3, B:C=4:5. Find A:C.",opts:["8:15","2:5","4:9","6:10"],ans:0},
+    {q:"8 pens cost Rs.64. Cost of 12 pens?",opts:["Rs.72","Rs.84","Rs.96","Rs.108"],ans:2},
+    {q:"Third proportion of 3 and 6 is:",opts:["9","12","15","18"],ans:1},
+  ],
+  percentages:[
+    {q:"What is 25% of 200?",opts:["25","50","75","100"],ans:1},
+    {q:"Shirt costs Rs.800. Discount 15%. Sale price?",opts:["Rs.640","Rs.660","Rs.680","Rs.700"],ans:2},
+    {q:"40 is what percent of 160?",opts:["20%","25%","30%","35%"],ans:1},
+    {q:"Price increases Rs.500 to Rs.600. % increase?",opts:["10%","15%","20%","25%"],ans:2},
+    {q:"30% of a number is 90. The number?",opts:["270","300","330","360"],ans:1},
+    {q:"Convert 7/20 to percentage:",opts:["30%","32%","35%","38%"],ans:2},
+    {q:"40 students, 60% girls. How many boys?",opts:["12","14","16","18"],ans:2},
+    {q:"Profit percent formula:",opts:["(Loss/CP)×100","(Profit/CP)×100","(SP−CP)×CP","(SP/CP)×100"],ans:1},
+  ],
+  financial:[
+    {q:"Simple Interest formula:",opts:["P×R×T","P×R/T","P+R×T","P/(R×T)"],ans:0},
+    {q:"P=Rs.2000, R=5%, T=3 years. SI=?",opts:["Rs.200","Rs.250","Rs.300","Rs.350"],ans:2},
+    {q:"SP=Rs.550, CP=Rs.500. Profit %=?",opts:["8%","9%","10%","11%"],ans:2},
+    {q:"Zakat rate on annual savings:",opts:["1%","2%","2.5%","5%"],ans:2},
+    {q:"Compound Interest adds interest to principal:",opts:["Never","Each period","Once only","At the end"],ans:1},
+    {q:"Phone bought Rs.12000, sold Rs.10800. Loss %?",opts:["8%","10%","12%","15%"],ans:1},
+    {q:"Annual income Rs.600,000. Tax at 5%=?",opts:["Rs.25,000","Rs.28,000","Rs.30,000","Rs.35,000"],ans:2},
+    {q:"1 USD=Rs.280. Rs.5600 = how many USD?",opts:["15","18","20","25"],ans:2},
+  ],
+  expressions:[
+    {q:"Simplify: 3x + 5x − 2x",opts:["4x","6x","8x","10x"],ans:1},
+    {q:"Expand: (a + b)²",opts:["a²+b²","a²+ab+b²","a²+2ab+b²","2a+2b"],ans:2},
+    {q:"Value of 2x²−3x+1 when x=2:",opts:["3","4","5","6"],ans:0},
+    {q:"Simplify: (3a²b)(2ab³)",opts:["5a²b³","6a³b⁴","6a²b³","5a³b⁴"],ans:1},
+    {q:"Which is a binomial?",opts:["x","3x+2","x²+2x+1","x+y+z"],ans:1},
+    {q:"Add: (2x²+3x−1)+(x²−2x+4)",opts:["3x²+x+3","3x²+x−3","2x²+x+3","3x²−x+3"],ans:0},
+    {q:"(x+3)(x−3)=?",opts:["x²−9","x²+9","x²−6","x²+6"],ans:0},
+    {q:"Coefficient of x in 7x³+5x²−4x+2:",opts:["−4","4","5","7"],ans:0},
+  ],
+  factorization:[
+    {q:"Factorise: x²−16",opts:["(x−4)(x−4)","(x+4)(x+4)","(x+4)(x−4)","(x−8)(x+2)"],ans:2},
+    {q:"Factorise: 6x²+9x",opts:["3x(2x+3)","6x(x+9)","3(2x²+9x)","9x(x+1)"],ans:0},
+    {q:"Factorise: x²+5x+6",opts:["(x+1)(x+6)","(x+2)(x+3)","(x+3)(x+3)","(x+6)(x−1)"],ans:1},
+    {q:"Factorise: a²−2ab+b²",opts:["(a−b)²","(a+b)²","(a−b)(a+b)","a(a−b)"],ans:0},
+    {q:"HCF of 4x²y and 8xy²:",opts:["4xy","8x²y²","4x²y²","2xy"],ans:0},
+    {q:"Factorise: 2x²−8",opts:["2(x−2)(x+2)","2(x²−4)","(2x−4)(x+2)","Both A and B"],ans:3},
+    {q:"Factorise: x²−x−12",opts:["(x−4)(x+3)","(x+4)(x−3)","(x−6)(x+2)","(x−3)(x−4)"],ans:0},
+    {q:"Sum of cubes: a³+b³=",opts:["(a+b)³","(a+b)(a²−ab+b²)","(a−b)(a²+ab+b²)","(a+b)(a²+b²)"],ans:1},
+  ],
+  linear:[
+    {q:"Solve: 3x−9=0",opts:["x=2","x=3","x=4","x=6"],ans:1},
+    {q:"Solve: 2x+5=13",opts:["x=3","x=4","x=5","x=6"],ans:1},
+    {q:"If 4x−3=2x+7, then x=?",opts:["3","4","5","6"],ans:2},
+    {q:"System: x+y=10, x−y=4. Find x.",opts:["5","6","7","8"],ans:2},
+    {q:"From above system, y=?",opts:["2","3","4","5"],ans:1},
+    {q:"Graph of y=2x+3 is a:",opts:["Parabola","Circle","Straight line","Hyperbola"],ans:2},
+    {q:"Slope of y=−3x+7 is:",opts:["7","3","−3","−7"],ans:2},
+    {q:"If 5(x−2)=15, then x=?",opts:["4","5","6","7"],ans:1},
+  ],
+  quadratic:[
+    {q:"Standard form of quadratic equation:",opts:["ax+b=0","ax²+bx+c=0","ax³+b=0","a/x+b=0"],ans:1},
+    {q:"Discriminant of ax²+bx+c is:",opts:["b²+4ac","b²−4ac","2b−4ac","b−4ac"],ans:1},
+    {q:"Solve: x²−5x+6=0",opts:["x=2,3","x=1,6","x=−2,−3","x=−1,6"],ans:0},
+    {q:"Sum of roots of x²−7x+12=0:",opts:["3","4","7","12"],ans:2},
+    {q:"Product of roots of x²−7x+12=0:",opts:["3","7","12","−12"],ans:2},
+    {q:"If discriminant > 0, roots are:",opts:["Imaginary","Equal","Real and distinct","Irrational"],ans:2},
+    {q:"Roots of x²+4=0 are:",opts:["Real","Zero","Equal","Imaginary"],ans:3},
+    {q:"Solve x²+6x+5=0 by factoring:",opts:["(x+1)(x+5)=0","(x+2)(x+3)=0","(x−1)(x−5)=0","(x+6)(x−1)=0"],ans:0},
+  ],
+  inequalities:[
+    {q:"Solve: x+3>7",opts:["x>3","x>4","x>5","x>10"],ans:1},
+    {q:"If −2x<6, then:",opts:["x<−3","x>−3","x>3","x<3"],ans:1},
+    {q:"Which symbol means 'greater than or equal to'?",opts:["<","≤","≥",">"],ans:2},
+    {q:"Solution of 2x−1≤5:",opts:["x≤3","x≤2","x≥3","x≥2"],ans:0},
+    {q:"x>3 on number line shown with:",opts:["Closed dot, arrow left","Open dot, arrow right","Closed dot, arrow right","Open dot, arrow left"],ans:1},
+    {q:"Solve: −3≤x+1≤5",opts:["−4≤x≤4","−2≤x≤4","−4≤x≤6","0≤x≤4"],ans:0},
+    {q:"If a>b and b>c, then:",opts:["a>c","a<c","a=c","Cannot determine"],ans:0},
+    {q:"Graph of x≥2 is:",opts:["Open circle at 2, left","Closed circle at 2, right","Open circle at 2, right","Closed circle at 2, left"],ans:1},
+  ],
+  functions:[
+    {q:"A function assigns to each input:",opts:["Multiple outputs","Exactly one output","No output","Any number"],ans:1},
+    {q:"Domain of f(x)=√x is:",opts:["All real numbers","x≥0","x>0","x<0"],ans:1},
+    {q:"If f(x)=3x−2, then f(4)=?",opts:["8","9","10","12"],ans:2},
+    {q:"Which test checks if a graph is a function?",opts:["Slope test","Vertical line test","Horizontal line test","Area test"],ans:1},
+    {q:"f(x)=x² is a:",opts:["Linear function","Quadratic function","Constant function","Cubic function"],ans:1},
+    {q:"Range of f(x)=x² is:",opts:["All real numbers","x≥0","x≤0","x≠0"],ans:1},
+    {q:"f(x)=2x, g(x)=x+1. f(g(2))=?",opts:["5","6","7","8"],ans:1},
+    {q:"An onto function maps to:",opts:["One-to-one","Every output has at least one input","All inputs to single output","None"],ans:1},
+  ],
+  coordinate:[
+    {q:"Distance between (0,0) and (3,4):",opts:["4","5","6","7"],ans:1},
+    {q:"Midpoint of (2,4) and (6,8):",opts:["(3,5)","(4,6)","(5,7)","(8,12)"],ans:1},
+    {q:"Slope of line through (1,2) and (3,6):",opts:["1","2","3","4"],ans:1},
+    {q:"Equation of x-axis:",opts:["x=0","y=0","x=y","y=x"],ans:1},
+    {q:"Point (−3,4) is in which quadrant?",opts:["I","II","III","IV"],ans:1},
+    {q:"Slope of a horizontal line:",opts:["1","−1","Undefined","0"],ans:3},
+    {q:"Slope of a vertical line:",opts:["0","1","Undefined","−1"],ans:2},
+    {q:"y-intercept of y=3x−5:",opts:["3","−3","5","−5"],ans:3},
+  ],
+  geometry:[
+    {q:"Sum of angles in a triangle:",opts:["90°","180°","270°","360°"],ans:1},
+    {q:"Area of triangle, base=10, height=6:",opts:["30","60","16","80"],ans:0},
+    {q:"A quadrilateral has how many sides?",opts:["3","4","5","6"],ans:1},
+    {q:"Perimeter of square with side 7:",opts:["14","21","28","49"],ans:2},
+    {q:"c²=a²+b² is:",opts:["Law of Sines","Law of Cosines","Pythagoras Theorem","Area formula"],ans:2},
+    {q:"Volume of cube with side 3:",opts:["9","18","27","36"],ans:2},
+    {q:"Circumference of circle, r=7 (π=22/7):",opts:["22","44","66","88"],ans:1},
+    {q:"Equilateral triangle has:",opts:["All different sides","Two equal sides","All equal sides","No equal sides"],ans:2},
+  ],
+  trigonometry:[
+    {q:"sin(30°)=?",opts:["1","√3/2","1/2","√2/2"],ans:2},
+    {q:"cos(60°)=?",opts:["1","1/2","√3/2","0"],ans:1},
+    {q:"tan(45°)=?",opts:["0","√3","1","√2"],ans:2},
+    {q:"sin²θ+cos²θ=?",opts:["0","2","1","sinθ"],ans:2},
+    {q:"In right triangle, sinθ = opposite / ?",opts:["Adjacent","Hypotenuse","Base","Height"],ans:1},
+    {q:"cos(0°)=?",opts:["0","1","−1","½"],ans:1},
+    {q:"tanθ = sinθ / ?",opts:["tanθ","sinθ","cosθ","1"],ans:2},
+    {q:"sin(90°)=?",opts:["0","√3/2","1/2","1"],ans:3},
+  ],
+  sets:[
+    {q:"A set with no elements is called:",opts:["Universal set","Power set","Empty set","Infinite set"],ans:2},
+    {q:"A∩B means:",opts:["A union B","A intersection B","A minus B","Complement of A"],ans:1},
+    {q:"A∪B means:
