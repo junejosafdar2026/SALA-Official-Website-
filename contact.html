@@ -14,11 +14,46 @@
     .info-icon { width:44px;height:44px;border-radius:12px;background:rgba(201,168,76,0.2);border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0; }
     .info-label { font-size:11px;color:rgba(255,255,255,0.5);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px; }
     .info-val { font-size:15px;color:var(--white);font-weight:600; }
-    .contact-form-card { background:var(--white);border:1px solid var(--border);border-radius:20px;padding:36px;box-shadow:var(--shadow); }
-    .contact-form-card h3 { font-family:'Amiri',serif;font-size:22px;color:var(--emerald);margin-bottom:24px; }
+    .contact-right { background:var(--white);border:1px solid var(--border);border-radius:20px;padding:36px;box-shadow:var(--shadow); }
+    .contact-right h3 { font-family:'Amiri',serif;font-size:24px;color:var(--emerald);margin-bottom:10px; }
+
+    .wa-btn {
+      display:flex; align-items:center; gap:16px;
+      border-radius:16px; padding:20px 22px;
+      text-decoration:none; margin-bottom:16px;
+      transition:.25s; border:none; width:100%; cursor:pointer;
+    }
+    .wa-btn:hover { transform:translateY(-3px); }
+    .wa-btn .wa-icon {
+      width:54px; height:54px; border-radius:50%;
+      background:rgba(255,255,255,0.22);
+      display:flex; align-items:center; justify-content:center;
+      font-size:28px; flex-shrink:0;
+    }
+    .wa-btn .wa-title { font-family:'Amiri',serif; font-size:18px; font-weight:700; color:#fff; margin-bottom:3px; }
+    .wa-btn .wa-sub   { font-size:13px; color:rgba(255,255,255,0.82); }
+    .wa-btn .wa-arrow { margin-left:auto; font-size:24px; color:rgba(255,255,255,0.7); }
+
+    .wa-group   { background:#25D366; box-shadow:0 4px 18px rgba(37,211,102,0.35); }
+    .wa-group:hover { box-shadow:0 8px 28px rgba(37,211,102,0.5); }
+    .wa-channel { background:linear-gradient(135deg,#128C7E,#075E54); box-shadow:0 4px 18px rgba(18,140,126,0.35); }
+    .wa-channel:hover { box-shadow:0 8px 28px rgba(18,140,126,0.5); }
+
+    /* BIG WhatsApp buttons on home - also used in footer banner */
+    .wa-banner {
+      background:linear-gradient(135deg,#1a2e1a,#0d1f0d);
+      border:1px solid #25D366;
+      border-radius:20px; padding:32px;
+      text-align:center; margin-bottom:48px;
+      box-shadow:0 4px 24px rgba(37,211,102,0.15);
+    }
+    .wa-banner h2 { font-family:'Amiri',serif; font-size:24px; color:#25D366; margin-bottom:6px; }
+    .wa-banner p  { font-size:14px; color:rgba(255,255,255,0.6); margin-bottom:24px; }
+    .wa-banner-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
   </style>
 </head>
 <body>
+
 <div class="topbar">✿ <span>Shah Abdul Latif Academy</span> — By Safdar Junejo ✿</div>
 <header>
   <span class="header-ornament">✿ ❀ ✿</span>
@@ -39,14 +74,35 @@
 </nav>
 
 <div class="wrapper">
+
   <div class="section-head">
-    <span class="ornament">📩</span>
-    <h1>Contact Us</h1>
+    <span class="ornament">💬</span>
+    <h1>Contact &amp; Community</h1>
     <div class="divider"></div>
-    <p>Have a question, suggestion, or need help? Reach out to us — we'd love to hear from you.</p>
+    <p>Join our WhatsApp group to chat with students and Safdar Junejo directly, or follow our channel for latest updates!</p>
+  </div>
+
+  <!-- BIG WhatsApp BANNER -->
+  <div class="wa-banner">
+    <h2>💬 Join Our WhatsApp Community</h2>
+    <p>Connect with Shah Abdul Latif Academy students and get instant updates on new quizzes and announcements</p>
+    <div class="wa-banner-btns">
+      <a href="https://chat.whatsapp.com/LPfuFLEUzOIHy6QER9WFd4?mode=gi_t" target="_blank"
+        style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;padding:14px 28px;border-radius:30px;font-family:'Amiri',serif;font-size:17px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,0.4);transition:.2s;"
+        onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        💬 Join WhatsApp Group
+      </a>
+      <a href="https://whatsapp.com/channel/0029Vb5tZoH0lwgxaM1Jmr2h" target="_blank"
+        style="display:inline-flex;align-items:center;gap:10px;background:#128C7E;color:#fff;padding:14px 28px;border-radius:30px;font-family:'Amiri',serif;font-size:17px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(18,140,126,0.4);transition:.2s;"
+        onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+        📢 Follow Our Channel
+      </a>
+    </div>
   </div>
 
   <div class="contact-grid">
+
+    <!-- LEFT — Info -->
     <div class="contact-info-card">
       <h3>Get in Touch</h3>
       <div class="info-item">
@@ -58,12 +114,12 @@
         <div><div class="info-label">Founder</div><div class="info-val">Safdar Junejo</div></div>
       </div>
       <div class="info-item">
-        <div class="info-icon">📧</div>
-        <div><div class="info-label">Email</div><div class="info-val">safdar@sala.edu.pk</div></div>
+        <div class="info-icon">💬</div>
+        <div><div class="info-label">WhatsApp Group</div><div class="info-val">Click to Join →</div></div>
       </div>
       <div class="info-item">
-        <div class="info-icon">🌐</div>
-        <div><div class="info-label">Website</div><div class="info-val">Shah Abdul Latif Academy</div></div>
+        <div class="info-icon">📢</div>
+        <div><div class="info-label">WhatsApp Channel</div><div class="info-val">Click to Follow →</div></div>
       </div>
       <div class="info-item">
         <div class="info-icon">📍</div>
@@ -74,59 +130,70 @@
       </div>
     </div>
 
-    <div class="contact-form-card">
-      <h3>✉️ Send a Message</h3>
-      <div id="contact-success" class="alert alert-success" style="display:none;">✅ Message saved! We will get back to you soon.</div>
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" id="cf-name" placeholder="Your full name">
+    <!-- RIGHT — WhatsApp Buttons -->
+    <div class="contact-right">
+      <h3>💬 Connect on WhatsApp</h3>
+      <p style="font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.8;">
+        Two ways to stay connected with Shah Abdul Latif Academy — join our group for discussions or follow our channel for announcements!
+      </p>
+
+      <!-- Group Button -->
+      <a href="https://chat.whatsapp.com/LPfuFLEUzOIHy6QER9WFd4?mode=gi_t" target="_blank" class="wa-btn wa-group">
+        <div class="wa-icon">💬</div>
+        <div>
+          <div class="wa-title">WhatsApp Group</div>
+          <div class="wa-sub">Chat with students · Ask questions · Discuss quizzes</div>
+        </div>
+        <div class="wa-arrow">→</div>
+      </a>
+
+      <!-- Channel Button -->
+      <a href="https://whatsapp.com/channel/0029Vb5tZoH0lwgxaM1Jmr2h" target="_blank" class="wa-btn wa-channel">
+        <div class="wa-icon">📢</div>
+        <div>
+          <div class="wa-title">WhatsApp Channel</div>
+          <div class="wa-sub">New quiz alerts · Updates · Announcements</div>
+        </div>
+        <div class="wa-arrow">→</div>
+      </a>
+
+      <div style="margin-top:20px;padding:16px 20px;background:rgba(37,211,102,0.07);border-radius:12px;border-left:4px solid #25D366;font-size:14px;color:var(--muted);line-height:1.7;">
+        💡 <strong style="color:#128C7E;">Tip:</strong> Join the group to talk directly with <strong>Safdar Junejo</strong> and get help from fellow students!
       </div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input type="email" id="cf-email" placeholder="your@email.com">
-      </div>
-      <div class="form-group">
-        <label>Subject</label>
-        <input type="text" id="cf-subject" placeholder="Quiz question, suggestion, bug report…">
-      </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea id="cf-message" placeholder="Write your message here…" rows="5"></textarea>
-      </div>
-      <button class="btn btn-primary" onclick="sendMessage()">📤 Send Message</button>
     </div>
+
   </div>
 
   <div style="text-align:center;margin-top:48px;font-size:28px;letter-spacing:6px;">🌸 🌼 🌺 🌻 🌹 🌷</div>
-</div>
+
+</div><!-- /wrapper -->
 
 <footer>
   <div class="footer-logo">✿ Shah Abdul Latif Academy ✿</div>
   <p>By <strong style="color:var(--gold-lt)">Safdar Junejo</strong></p>
   <div class="footer-links">
-    <a href="index.html">Home</a><a href="math-quiz.html">Math Quiz</a>
-    <a href="english-quiz.html">English Quiz</a><a href="about.html">About</a>
-    <a href="privacy.html">Privacy</a><a href="contact.html">Contact</a>
+    <a href="index.html">Home</a>
+    <a href="math-quiz.html">Math Quiz</a>
+    <a href="english-quiz.html">English Quiz</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="contact.html">Contact</a>
   </div>
-  <p style="margin-top:10px;font-size:12px;">© 2026 Shah Abdul Latif Academy.</p>
+  <!-- WhatsApp links in footer too -->
+  <div style="display:flex;gap:12px;justify-content:center;margin:14px 0;flex-wrap:wrap;">
+    <a href="https://chat.whatsapp.com/LPfuFLEUzOIHy6QER9WFd4?mode=gi_t" target="_blank"
+      style="display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;text-decoration:none;">
+      💬 WhatsApp Group
+    </a>
+    <a href="https://whatsapp.com/channel/0029Vb5tZoH0lwgxaM1Jmr2h" target="_blank"
+      style="display:inline-flex;align-items:center;gap:8px;background:#128C7E;color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;text-decoration:none;">
+      📢 WhatsApp Channel
+    </a>
+  </div>
+  <p style="margin-top:10px;font-size:12px;">© 2026 Shah Abdul Latif Academy. All rights reserved.</p>
 </footer>
-<script src="app.js"></script>
-<script>
-function sendMessage() {
-  const name    = document.getElementById('cf-name').value.trim();
-  const email   = document.getElementById('cf-email').value.trim();
-  const subject = document.getElementById('cf-subject').value.trim();
-  const message = document.getElementById('cf-message').value.trim();
-  if (!name||!email||!message) { showToast('Please fill in all required fields.','error'); return; }
-  Store.push('messages', { name, email, subject, message, time: new Date().toISOString() });
-  document.getElementById('contact-success').style.display='flex';
-  document.getElementById('cf-name').value='';
-  document.getElementById('cf-email').value='';
-  document.getElementById('cf-subject').value='';
-  document.getElementById('cf-message').value='';
-  showToast('Message sent! 📨');
-}
-</script>
-</body>
-</html>
 
+<script src="app.js"></script>
+</body>
+      </html>
+      
