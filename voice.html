@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice (Active & Passive) Quiz — Shah Abdul Latif Academy</title>
+  <link rel="stylesheet" href="english-style.css">
+</head>
+<body>
+<div class="topbar">✿ <span>Shah Abdul Latif Academy</span> — By Safdar Junejo ✿</div>
+<header>
+  <span class="header-ornament">✿ ❀ ✿</span>
+  <div class="academy-name">Shah Abdul Latif Academy</div>
+  <div class="academy-by">By Safdar Junejo</div>
+</header>
+<nav>
+  <div class="nav-inner">
+    <a href="../index.html">🏠 Home</a>
+    <a href="../math-quiz.html">➕ Math Quiz</a>
+    <a href="../english-quiz.html">📝 English Quiz</a>
+    <a href="../updates.html">📢 Updates</a>
+    <a href="../about.html">ℹ️ About Us</a>
+    <a href="../privacy.html">🔒 Privacy</a>
+    <a href="../contact.html">📩 Contact</a>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <!-- BANNER -->
+  <div class="quiz-banner">
+    <span class="big">🔄</span>
+    <div class="topic-num">Topic 7</div>
+    <h1>Voice (Active & Passive)</h1>
+    <p>English Quiz · 20 Questions · 10 per page · Choose an answer then click Submit</p>
+  </div>
+
+  <!-- ALL TOPICS NAV -->
+  <div style="margin-bottom:28px;">
+    <p style="font-size:13px;color:var(--muted);font-weight:700;margin-bottom:12px;">📚 All English Topics:</p>
+    <div class="topic-nav-grid">
+    <a href="parts-of-speech.html" class="topic-nav-card"><span class="t-icon">🔤</span><div class="t-num">Topic 1</div><div class="t-name">Parts of Speech</div></a>
+    <a href="tenses.html" class="topic-nav-card"><span class="t-icon">⏰</span><div class="t-num">Topic 2</div><div class="t-name">Tenses</div></a>
+    <a href="subject-verb.html" class="topic-nav-card"><span class="t-icon">🔗</span><div class="t-num">Topic 3</div><div class="t-name">Subject Verb Agreement</div></a>
+    <a href="articles.html" class="topic-nav-card"><span class="t-icon">📌</span><div class="t-num">Topic 4</div><div class="t-name">Articles</div></a>
+    <a href="prepositions.html" class="topic-nav-card"><span class="t-icon">📍</span><div class="t-num">Topic 5</div><div class="t-name">Prepositions</div></a>
+    <a href="modals.html" class="topic-nav-card"><span class="t-icon">💭</span><div class="t-num">Topic 6</div><div class="t-name">Modals</div></a>
+    <a href="voice.html" class="topic-nav-card current"><span class="t-icon">🔄</span><div class="t-num">Topic 7</div><div class="t-name">Voice</div></a>
+    <a href="narration.html" class="topic-nav-card"><span class="t-icon">💬</span><div class="t-num">Topic 8</div><div class="t-name">Narration</div></a>
+    <a href="error-detection.html" class="topic-nav-card"><span class="t-icon">🔍</span><div class="t-num">Topic 9</div><div class="t-name">Error Detection</div></a>
+    <a href="synonyms.html" class="topic-nav-card"><span class="t-icon">🟰</span><div class="t-num">Topic 10</div><div class="t-name">Synonyms</div></a>
+    <a href="antonyms.html" class="topic-nav-card"><span class="t-icon">↔️</span><div class="t-num">Topic 11</div><div class="t-name">Antonyms</div></a>
+    <a href="comprehension.html" class="topic-nav-card"><span class="t-icon">📖</span><div class="t-num">Topic 12</div><div class="t-name">Reading Comprehension</div></a>
+    <a href="writing-skills.html" class="topic-nav-card"><span class="t-icon">✍️</span><div class="t-num">Topic 13</div><div class="t-name">Writing Skills</div></a>
+    </div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="page-progress"><div class="page-progress-fill" id="pageProgressFill" style="width:0%"></div></div>
+
+  <!-- META -->
+  <div class="page-meta">
+    <div class="page-info-badge" id="pageInfo">Page 1</div>
+    <div class="score-badge" id="scoreDisplay">Answer questions to see score</div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="questionsContainer"></div>
+
+  <!-- PAGINATION -->
+  <div class="pagination">
+    <button class="btn-page btn-prev" id="btnPrev" onclick="goPage(-1)" disabled>← Previous</button>
+    <button class="btn-page btn-submit btn-gold" id="btnSubmit" onclick="submitPage()" style="background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:var(--ink);">✅ Submit Page</button>
+    <button class="btn-page btn-next" id="btnNext" onclick="goPage(1)">Next →</button>
+  </div>
+
+  <!-- COMMENT SECTION -->
+  <div class="comments-section">
+    <h3>💬 Discussion — Voice (Active & Passive)</h3>
+    <div id="cmt-login-notice" style="display:none;" class="alert-info">
+      🔑 <a href="../login.html" style="color:var(--emerald);font-weight:700;">Sign in</a> to leave a comment.
+    </div>
+    <div id="cmt-form" style="margin-bottom:20px;">
+      <div class="form-group">
+        <label>Your Comment</label>
+        <textarea id="cmt-input" placeholder="Ask a question, share a tip, or help a classmate about Voice (Active & Passive)…"></textarea>
+      </div>
+      <button class="btn-primary" onclick="postComment()">Post Comment</button>
+    </div>
+    <div id="cmt-list"></div>
+  </div>
+
+  <div style="text-align:center;margin-top:40px;font-size:26px;letter-spacing:6px;">🌸 🌼 🌺 🌻 🌹 🌷</div>
+</div>
+
+<footer>
+  <div class="footer-logo">✿ Shah Abdul Latif Academy ✿</div>
+  <p>By <strong style="color:var(--gold-lt)">Safdar Junejo</strong></p>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="../math-quiz.html">Math Quiz</a>
+    <a href="../english-quiz.html">English Quiz</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </div>
+  <div style="display:flex;gap:10px;justify-content:center;margin:12px 0;flex-wrap:wrap;">
+    <a href="https://chat.whatsapp.com/LPfuFLEUzOIHy6QER9WFd4?mode=gi_t" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none;">💬 WhatsApp Group</a>
+    <a href="https://whatsapp.com/channel/0029Vb5tZoH0lwgxaM1Jmr2h" target="_blank" style="display:inline-flex;align-items:center;gap:6px;background:#128C7E;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;font-weight:700;text-decoration:none;">📢 WhatsApp Channel</a>
+  </div>
+  <p style="font-size:12px;">© 2026 Shah Abdul Latif Academy.</p>
+</footer>
+
+<script src="../app.js"></script>
+<script src="english-common.js"></script>
+<script>
+const QUESTIONS = [
+  {q:"Active: 'She writes a letter.' Passive:", opts:["A letter is written by her.", "A letter was written by her.", "A letter written by her.", "A letter will be written by her."], ans:0},
+  {q:"'The cake was eaten by him.' Active voice:", opts:["He eats the cake.", "He ate the cake.", "He had eaten the cake.", "He will eat the cake."], ans:1},
+  {q:"'He is reading a book.' Passive:", opts:["A book was being read by him.", "A book is being read by him.", "A book has been read by him.", "A book will be read by him."], ans:1},
+  {q:"Passive of 'She will write the report.':", opts:["The report was written by her.", "The report will be written by her.", "The report is written by her.", "The report has been written by her."], ans:1},
+  {q:"Passive of 'They have completed the task.':", opts:["The task was completed by them.", "The task is completed by them.", "The task has been completed by them.", "The task will be completed by them."], ans:2},
+  {q:"'Mangoes are sold here.' Active voice:", opts:["Someone sell mangoes here.", "Someone sells mangoes here.", "Someone sold mangoes here.", "Someone is selling mangoes here."], ans:1},
+  {q:"Passive of 'She taught us English.':", opts:["English was taught to us by her.", "English is taught to us by her.", "English has been taught to us by her.", "English will be taught by her."], ans:0},
+  {q:"'The window was broken by the ball.' — Subject is:", opts:["the window", "the ball", "broken", "by"], ans:0},
+  {q:"In passive voice, the verb form used is:", opts:["Infinitive", "Past tense", "Past participle", "Present participle"], ans:2},
+  {q:"Passive of 'He is eating rice.':", opts:["Rice is eaten by him.", "Rice was being eaten by him.", "Rice is being eaten by him.", "Rice has been eaten by him."], ans:2},
+  {q:"'Letters are delivered by the postman.' Active:", opts:["The postman delivers letters.", "The postman delivered letters.", "The postman will deliver letters.", "The postman has delivered letters."], ans:0},
+  {q:"Passive of 'Open the door.':", opts:["The door is opened.", "Let the door be opened.", "The door was opened.", "Door be open."], ans:1},
+  {q:"'The movie was being watched by them.' Active:", opts:["They watch the movie.", "They watched the movie.", "They were watching the movie.", "They have watched the movie."], ans:2},
+  {q:"Passive of 'Who broke the glass?':", opts:["By whom was the glass broken?", "Who was the glass broken by?", "The glass was broken by whom?", "By whom the glass was broken?"], ans:0},
+  {q:"'He has been given a prize.' identifies what kind of object?", opts:["Direct object", "Indirect object", "Subject", "Complement"], ans:1},
+  {q:"Passive of 'They will build a bridge.':", opts:["A bridge will be built by them.", "A bridge is built by them.", "A bridge was built by them.", "A bridge has been built by them."], ans:0},
+  {q:"Passive voice is preferred when:", opts:["The doer is important", "The doer is unknown/unimportant", "The action is recent", "The action is habitual"], ans:1},
+  {q:"Passive of 'She sings a song.':", opts:["A song is sung by her.", "A song was sung by her.", "A song will be sung by her.", "A song has been sung by her."], ans:0},
+  {q:"'The thief was caught.' The agent is:", opts:["Expressed", "Implied (unknown)", "The thief", "Caught"], ans:1},
+  {q:"Passive of 'She is cooking food.':", opts:["Food is being cooked by her.", "Food was cooked by her.", "Food has been cooked by her.", "Food will be cooked by her."], ans:0},
+];
+
+window._topicKey = 'voice';
+document.addEventListener('DOMContentLoaded', () => {
+  initQuiz(QUESTIONS, 'voice');
+  // Comments
+  renderComments('voice', 'cmt-list');
+  const u = typeof Auth !== 'undefined' ? Auth.currentUser() : null;
+  if (!u) {
+    document.getElementById('cmt-login-notice').style.display = 'block';
+    document.getElementById('cmt-form').style.display = 'none';
+  }
+});
+
+function postComment() {
+  submitComment('voice', 'cmt-list');
+}
+</script>
+</body>
+  </html>
