@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shah Abdul Latif Academy — Home</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* HERO */
+    .hero {
+      background: linear-gradient(160deg, var(--emerald) 0%, #004d33 40%, var(--ink) 100%);
+      min-height: 520px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 80px 20px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute;inset:0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23c9a84c' fill-opacity='0.05'%3E%3Cpath d='M40 0L50 30L80 40L50 50L40 80L30 50L0 40L30 30Z'/%3E%3C/g%3E%3C/svg%3E");
+      animation: floatBg 20s linear infinite;
+    }
+    @keyframes floatBg { from{background-position:0 0;} to{background-position:160px 160px;} }
+
+    .hero-content { position:relative; z-index:1; max-width:700px; }
+    .hero-badge {
+      display:inline-block;
+      background:rgba(201,168,76,0.2); border:1px solid var(--gold);
+      color:var(--gold-lt); padding:6px 20px; border-radius:30px;
+      font-size:13px; font-weight:700; letter-spacing:1px; margin-bottom:20px;
+    }
+    .hero h1 {
+      font-family:'Amiri',serif;
+      font-size:clamp(32px,6vw,58px);
+      color:var(--white); font-weight:700;
+      line-height:1.15; margin-bottom:16px;
+      text-shadow:0 4px 20px rgba(0,0,0,0.4);
+    }
+    .hero h1 span { color:var(--gold-lt); }
+    .hero p {
+      font-size:16px; color:rgba(255,255,255,0.75);
+      line-height:1.8; margin-bottom:32px; max-width:520px; margin-left:auto; margin-right:auto;
+    }
+    .hero-btns { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+
+    /* FEATURES */
+    .features-grid {
+      display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+      gap:24px; margin-bottom:60px;
+    }
+    .feat-card {
+      background:var(--white); border:1px solid var(--border); border-radius:18px;
+      padding:32px 24px; text-align:center; transition:.25s;
+      box-shadow:var(--shadow); position:relative; overflow:hidden;
+    }
+    .feat-card::after {
+      content:''; position:absolute; bottom:0; left:0; right:0;
+      height:3px; background:linear-gradient(90deg,var(--emerald),var(--gold));
+      transform:scaleX(0); transform-origin:left; transition:.3s;
+    }
+    .feat-card:hover::after { transform:scaleX(1); }
+    .feat-card:hover { transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+    .feat-icon { font-size:44px; margin-bottom:14px; display:block; }
+    .feat-title { font-family:'Amiri',serif; font-size:20px; color:var(--emerald); font-weight:700; margin-bottom:8px; }
+    .feat-desc { font-size:14px; color:var(--muted); line-height:1.7; }
+
+    /* QUIZZES PREVIEW */
+    .quiz-preview-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:60px;
+    }
+    @media(max-width:600px){ .quiz-preview-grid{ grid-template-columns:1fr; } }
+    .quiz-preview {
+      background:var(--white); border:1px solid var(--border);
+      border-radius:20px; overflow:hidden; transition:.2s;
+      box-shadow:var(--shadow); text-decoration:none; color:inherit;
+      display:block;
+    }
+    .quiz-preview:hover { transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--gold); }
+    .quiz-preview-header {
+      padding:32px 24px; text-align:center;
+    }
+    .quiz-preview-header.math { background:linear-gradient(135deg,var(--emerald),#004d33); }
+    .quiz-preview-header.eng  { background:linear-gradient(135deg,#1a3a5c,#0d2240); }
+    .quiz-preview-header .big { font-size:52px; display:block; margin-bottom:8px; }
+    .quiz-preview-header h3 { font-family:'Amiri',serif; font-size:22px; color:var(--white); font-weight:700; }
+    .quiz-preview-body { padding:20px 24px; }
+    .quiz-preview-body p { font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:16px; }
+
+    /* STATS BAR */
+    .stats-bar {
+      background:linear-gradient(135deg,var(--emerald),#004d33);
+      border-radius:20px; padding:32px; margin-bottom:60px;
+      display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center;
+    }
+    @media(max-width:600px){ .stats-bar{ grid-template-columns:1fr 1fr; } }
+    .stat-item .val { font-family:'Amiri',serif; font-size:36px; color:var(--gold-lt); font-weight:700; }
+    .stat-item .lbl { font-size:13px; color:rgba(255,255,255,0.65); margin-top:4px; }
+
+    /* UPDATES PREVIEW */
+    .updates-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; margin-bottom:60px; }
+    .update-card {
+      background:var(--white); border:1px solid var(--border);
+      border-radius:16px; padding:24px; box-shadow:var(--shadow); transition:.2s;
+    }
+    .update-card:hover { border-color:var(--emerald); transform:translateY(-3px); }
+    .update-date { font-size:11px; color:var(--muted); font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:8px; }
+    .update-title { font-family:'Amiri',serif; font-size:18px; color:var(--emerald); margin-bottom:8px; }
+    .update-text { font-size:14px; color:var(--muted); line-height:1.7; }
+
+    /* FLOWERS decoration */
+    .flowers-row { text-align:center; font-size:32px; letter-spacing:8px; margin:16px 0; }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  🌸 Welcome to <span>Shah Abdul Latif Academy</span> — Knowledge is the Light of the Soul 🌸
+</div>
+
+<header>
+  <span class="header-ornament">✿ ❀ ✾ ❀ ✿</span>
+  <div class="academy-name">Shah Abdul Latif Academy</div>
+  <div class="academy-subtitle">Science · Mathematics · English · Technology</div>
+  <div class="academy-by">By Safdar Junejo</div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html">🏠 Home</a>
+    <a href="math-quiz.html">➕ Math Quiz</a>
+    <a href="english-quiz.html">📝 English Quiz</a>
+    <a href="updates.html">📢 Updates</a>
+    <a href="about.html">ℹ️ About Us</a>
+    <a href="privacy.html">🔒 Privacy</a>
+    <a href="contact.html">📩 Contact</a>
+    <span id="nav-auth-btn" style="display:contents;"></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">✿ Established for Excellence ✿</div>
+    <h1>Learn. <span>Grow.</span> Achieve.</h1>
+    <p>Shah Abdul Latif Academy offers quality education in Mathematics, English, Science and Technology for college students. Test your knowledge, track your progress, and rise to the top.</p>
+    <div class="hero-btns">
+      <a href="math-quiz.html" class="btn btn-gold">➕ Math Quiz</a>
+      <a href="english-quiz.html" class="btn btn-primary">📝 English Quiz</a>
+      <a href="login.html" class="btn btn-outline" style="border-color:#fff;color:#fff;">🔑 Join Free</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrapper">
+
+  <!-- FLOWERS -->
+  <div class="flowers-row">🌸 🌼 🌺 🌻 🌹 🌷 🌸 🌼 🌺</div>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-item"><div class="val" id="totalVisitors">—</div><div class="lbl">Total Visitors</div></div>
+    <div class="stat-item"><div class="val" id="totalStudents">—</div><div class="lbl">Registered Students</div></div>
+    <div class="stat-item"><div class="val">40+</div><div class="lbl">Quiz Questions</div></div>
+    <div class="stat-item"><div class="val">Free</div><div class="lbl">Always Free</div></div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="section-head">
+    <span class="ornament">❀ ✾ ❀</span>
+    <h2>Why Choose Our Academy?</h2>
+    <div class="divider"></div>
+    <p>A complete learning platform designed specifically for college-level students seeking academic excellence.</p>
+  </div>
+
+  <div class="features-grid">
+    <div class="feat-card">
+      <span class="feat-icon">➕</span>
+      <div class="feat-title">Mathematics Quiz</div>
+      <div class="feat-desc">Algebra, Calculus, Geometry, Statistics — master every topic with interactive quizzes and instant feedback.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">📝</span>
+      <div class="feat-title">English Quiz</div>
+      <div class="feat-desc">Grammar, Vocabulary, Reading Comprehension — sharpen your English language skills for academic success.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🏆</span>
+      <div class="feat-title">XP & Leaderboard</div>
+      <div class="feat-desc">Earn experience points on every quiz. Compete with fellow students and track your rank in real time.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">📢</span>
+      <div class="feat-title">News & Updates</div>
+      <div class="feat-desc">Stay current with the latest updates, new quiz topics, announcements and academic resources.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">💬</span>
+      <div class="feat-title">Comment & Discuss</div>
+      <div class="feat-desc">Leave comments on each quiz, discuss topics with classmates, and learn from each other's perspectives.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">🛡️</span>
+      <div class="feat-title">Admin Oversight</div>
+      <div class="feat-desc">Our platform is monitored by the academy administrator to ensure a safe and productive learning environment.</div>
+    </div>
+  </div>
+
+  <!-- QUIZ PREVIEW -->
+  <div class="section-head">
+    <span class="ornament">✿ ❀ ✿</span>
+    <h2>Our Quizzes</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="quiz-preview-grid">
+    <a href="math-quiz.html" class="quiz-preview">
+      <div class="quiz-preview-header math">
+        <span class="big">➕</span>
+        <h3>Mathematics Quiz</h3>
+      </div>
+      <div class="quiz-preview-body">
+        <p>Test your skills across Algebra & Equations, Calculus & Derivatives, Geometry & Trigonometry, and Statistics & Probability.</p>
+        <span class="btn btn-primary">Start Math Quiz →</span>
+      </div>
+    </a>
+    <a href="english-quiz.html" class="quiz-preview">
+      <div class="quiz-preview-header eng">
+        <span class="big">📝</span>
+        <h3>English Quiz</h3>
+      </div>
+      <div class="quiz-preview-body">
+        <p>Sharpen your Grammar, Vocabulary, Reading Comprehension and Writing skills with our comprehensive English quiz.</p>
+        <span class="btn btn-primary">Start English Quiz →</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- UPDATES PREVIEW -->
+  <div class="section-head">
+    <span class="ornament">❀ ✾ ❀</span>
+    <h2>Latest Updates</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="updates-grid">
+    <div class="update-card">
+      <div class="update-date">📅 March 12, 2026</div>
+      <div class="update-title">New Math Calculus Module Added</div>
+      <div class="update-text">We have added 10 new calculus questions covering limits, derivatives and integration to the Mathematics Quiz.</div>
+    </div>
+    <div class="update-card">
+      <div class="update-date">📅 March 8, 2026</div>
+      <div class="update-title">Comment Section Launched</div>
+      <div class="update-text">Students can now leave comments on every quiz page. Share your thoughts, questions and tips with fellow learners.</div>
+    </div>
+    <div class="update-card">
+      <div class="update-date">📅 March 1, 2026</div>
+      <div class="update-title">Academy Website Launched 🎉</div>
+      <div class="update-text">Shah Abdul Latif Academy's official website is now live. Register for free, take quizzes and start earning XP today!</div>
+    </div>
+  </div>
+
+  <div style="text-align:center;">
+    <a href="updates.html" class="btn btn-outline">View All Updates →</a>
+  </div>
+
+  <!-- FLOWERS -->
+  <div class="flowers-row" style="margin-top:48px;">🌷 🌸 🌼 🌺 🌻 🌹 🌷 🌸 🌼</div>
+
+</div><!-- /wrapper -->
+
+<footer>
+  <div class="footer-logo">✿ Shah Abdul Latif Academy ✿</div>
+  <p>By <strong style="color:var(--gold-lt)">Safdar Junejo</strong></p>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="math-quiz.html">Math Quiz</a>
+    <a href="english-quiz.html">English Quiz</a>
+    <a href="about.html">About</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <p style="margin-top:10px;font-size:12px;">© 2026 Shah Abdul Latif Academy. All rights reserved.</p>
+</footer>
+
+<script src="app.js"></script>
+<script>
+  document.getElementById('totalVisitors').textContent = Store.get('visits',[]).length;
+  document.getElementById('totalStudents').textContent = Auth.getUsers().length;
+</script>
+</body>
+        </html>
+
